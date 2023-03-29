@@ -3,7 +3,7 @@ import Layout from "../Components/Layout";
 import { FormGroup, Typography } from "@mui/material";
 import { Box, Button, Input } from "@mui/material";
 
-export const Login = () => {
+export const LoginRestreador = () => {
   return (
     <Layout>
       <Box
@@ -20,10 +20,7 @@ export const Login = () => {
           }}
         >
           <Typography sx={{ mt: 5 }} variant='h4' color={"#ffff"}>
-            TGR
-          </Typography>
-          <Typography variant='h5' color={"#ffff"}>
-            Administración
+            Restreador
           </Typography>
 
           <Input

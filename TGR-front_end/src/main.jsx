@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./Styles/index.css";
+import "./Styles/styles.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Login } from "./Routes/Login";
@@ -10,13 +11,20 @@ import { Cliente } from "./Routes/Cliente";
 import { Mensajero } from "./Routes/Mensajero";
 import { Contenedores } from "./Routes/Contenedores";
 import { HBL } from "./Routes/HBL";
-import { ThemeProvider } from "@emotion/react";
-import theme from "./Styles/mainStyle";
+import { LoginRestreador } from "./Routes/LoginRestreador";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Login />,
+  },
+  {
+    path: "/loginAdministracion",
+    element: <Login />,
+  },
+  {
+    path: "/loginRestreador",
+    element: <LoginRestreador />,
   },
   {
     path: "/administrador",
@@ -42,8 +50,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

@@ -1,21 +1,17 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
+
+import { Container } from "@mui/material";
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Box
+      <Container
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          alignContent: "center",
-          mt: 20,
+          mt: 2,
         }}
       >
         <main>{children}</main>
-      </Box>
+      </Container>
     </>
   );
 };
