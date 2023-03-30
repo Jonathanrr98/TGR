@@ -1,6 +1,5 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,10 +12,17 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import IconClient from "../assets/icons/Clientes.png";
+import IconAdmin from "../assets/icons/Administradores.png";
+import IconCSesion from "../assets/icons/CerrarSesion.png";
+import IconContenedores from "../assets/icons/Contenedores.png";
+import IconHBL from "../assets/icons/HBL.png";
+import IconManifiesto from "../assets/icons/Manifiesto.png";
+import IconMensajero from "../assets/icons/Mensajeros.png";
 
-import { Container } from "@mui/material";
+import { Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -75,6 +81,7 @@ const Drawer = styled(MuiDrawer, {
   flexShrink: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
+
   ...(open && {
     ...openedMixin(theme),
     "& .MuiDrawer-paper": openedMixin(theme),
@@ -99,13 +106,12 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Container
-        sx={{
-          display: "flex",
-          backgroundColor: "#3A3A3A",
-          maxWidth: 1200,
-          minWidth: 800,
-        }}
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        direction='row-reverse'
+        justifyContent='space-between'
+        alignItems='center'
       >
         <AppBar
           sx={{ backgroundColor: "#252525", boxShadow: 0 }}
@@ -130,12 +136,16 @@ const Layout = ({ children }) => {
           </Toolbar>
         </AppBar>
         <Drawer
+          PaperProps={{ style: { backgroundColor: "#252525" } }}
           sx={{ backgroundColor: "#3A3A3A" }}
           variant='permanent'
           open={open}
         >
           <DrawerHeader sx={{ backgroundColor: "#252525" }}>
-            <IconButton onClick={handleDrawerClose}>
+            <IconButton
+              sx={{ backgroundColor: "#ffff", p: 0, m: 0 }}
+              onClick={handleDrawerClose}
+            >
               {theme.direction === "rtl" ? (
                 <ChevronRightIcon />
               ) : (
@@ -150,61 +160,113 @@ const Layout = ({ children }) => {
               "Mensajeros",
               "Administradores",
               "HBL",
-              "HBL",
               "Manifiesto",
               "Contenedores",
               "Cerrar Sesión",
             ].map((text, index) => (
               <ListItem
+                PaperProps={{ style: { border: 0 } }}
                 key={text}
                 disablePadding
                 sx={{
                   display: "block",
                   backgroundColor: "#252525",
-                  border: 1,
+
+                  borderBlockColor: "#252525",
+                  my: 0.8,
                 }}
               >
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                    backgroundColor: "#CF7A171C",
-                  }}
+                <Link
+                  to={
+                    text === "Clientes"
+                      ? "/cliente"
+                      : text === "Mensajeros"
+                      ? "/mensajero"
+                      : text === "Administradores"
+                      ? "/administrador"
+                      : text === "HBL"
+                      ? "/hbl"
+                      : text === "Manifiesto"
+                      ? "/manifiesto"
+                      : text === "Contenedores"
+                      ? "/contenedores"
+                      : "/"
+                  }
+                  style={{ textDecoration: "none", color: "#ffff" }}
                 >
-                  <ListItemIcon
+                  <ListItemButton
                     sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
+                      minHeight: 48,
+                      maxHeight: 30,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                      backgroundColor: "#CF7A171C",
                     }}
                   >
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={text}
-                    sx={{
-                      m: 1,
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {text === "Clientes" ? (
+                        <img src={IconClient} />
+                      ) : text === "Manifiesto" ? (
+                        <img src={IconManifiesto} />
+                      ) : text === "HBL" ? (
+                        <img src={IconHBL} />
+                      ) : text === "Contenedores" ? (
+                        <img src={IconContenedores} />
+                      ) : text === "Mensajeros" ? (
+                        <img src={IconMensajero} />
+                      ) : text === "Administradores" ? (
+                        <img src={IconAdmin} />
+                      ) : text === "Cerrar Sesión" ? (
+                        <img src={IconCSesion} />
+                      ) : (
+                        <MailIcon />
+                      )}
+                    </ListItemIcon>
 
-                      opacity: open ? 1 : 0,
-                    }}
-                  />
-                </ListItemButton>
+                    <ListItemText
+                      primary={text}
+                      sx={{
+                        m: 1,
+                        opacity: open ? 1 : 0,
+                      }}
+                    />
+                  </ListItemButton>
+                </Link>
               </ListItem>
             ))}
           </List>
         </Drawer>
-        <Container component='main' sx={{ flexGrow: 1, p: 3 }}>
+        <Grid
+          sx={{
+            width: "90%",
+            mt: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <DrawerHeader />
-          <Container
+          <Grid
+            container
+            spacing={2}
             sx={{
+              width: "90%",
               mt: 2,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
             <main>{children}</main>
-          </Container>
-        </Container>
-      </Container>
+          </Grid>
+        </Grid>
+      </Grid>
     </>
   );
 };

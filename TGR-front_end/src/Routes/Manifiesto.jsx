@@ -1,5 +1,6 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,6 +13,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import IconClient from "../assets/icons/Clientes.png";
 import IconAdmin from "../assets/icons/Administradores.png";
@@ -21,9 +23,9 @@ import IconHBL from "../assets/icons/HBL.png";
 import IconManifiesto from "../assets/icons/Manifiesto.png";
 import IconMensajero from "../assets/icons/Mensajeros.png";
 
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import TableContenedor from "../Components/TableContenedor";
+import { Boton } from "../Components/Boton";
 
 const drawerWidth = 240;
 
@@ -93,7 +95,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export const Contenedores = () => {
+export const Manifiesto = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -104,6 +106,7 @@ export const Contenedores = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
   return (
     <>
       <Grid
@@ -263,10 +266,12 @@ export const Contenedores = () => {
               alignItems: "center",
             }}
           >
-            <main>{<TableContenedor />}</main>
+            <main>{<Boton text={"Crear Manifiesto"} />}</main>
           </Grid>
         </Grid>
       </Grid>
     </>
   );
 };
+
+export default MailIcon;

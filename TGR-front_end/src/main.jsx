@@ -12,6 +12,7 @@ import { Mensajero } from "./Routes/Mensajero";
 import { Contenedores } from "./Routes/Contenedores";
 import { HBL } from "./Routes/HBL";
 import { LoginRestreador } from "./Routes/LoginRestreador";
+import { Manifiesto } from "./Routes/Manifiesto";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/hbl",
     element: <HBL />,
+  },
+  {
+    path: "/manifiesto",
+    element: <Manifiesto />,
   },
 ]);
 
