@@ -13,9 +13,9 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Boton } from "./Boton";
 import { Grid } from "@mui/material";
-import { Container } from "@mui/system";
+import ModalAsignarPaquete from "./ModalAsignarPaquete";
+import ModalMensajero from "./ModalMensajero";
 
 function createData(name, pagago, mail, telefono, direccion, price) {
   return {
@@ -247,8 +247,9 @@ export default function TableMensajeros() {
           alignItems: "flex-end",
         }}
       >
-        <Boton text={"Asignar Paquetes"} />
-        <Boton text={"Crear Mensajero"} />
+        <ModalAsignarPaquete text={"Asignar Paquetes"} />
+
+        <ModalMensajero text={"Crear Mensajero"} />
       </Grid>
       <TableContainer
         sx={{ backgroundColor: "#252525", borderColor: "#694D2C" }}

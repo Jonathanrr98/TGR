@@ -15,6 +15,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Container } from "@mui/material";
 import { Boton } from "./Boton";
+import ModalAdmin from "./ModalAdmin";
 
 function createData(name, pagago, mail, telefono, direccion, price) {
   return {
@@ -239,7 +240,7 @@ const rows = [
 export default function TableAdmin() {
   return (
     <>
-      <Boton text={"Crear Administrador"} />
+      <ModalAdmin text={"Crear Administrador"} />
       <TableContainer
         sx={{ backgroundColor: "#252525", borderColor: "#694D2C" }}
         component={Paper}

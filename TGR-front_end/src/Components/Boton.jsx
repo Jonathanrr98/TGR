@@ -1,7 +1,7 @@
 import { Button, Container, Grid } from "@mui/material";
 import React from "react";
 
-export const Boton = ({ text }) => {
+export const Boton = ({ text, colorFondo, colorLetra }) => {
   return (
     <>
       <Grid
@@ -13,8 +13,8 @@ export const Boton = ({ text }) => {
       >
         <Button
           sx={{
-            backgroundColor: "#A86500",
-            color: "white",
+            backgroundColor: colorFondo,
+            color: colorLetra,
             borderRadius: "24px",
             m: 1,
             px: 2,
