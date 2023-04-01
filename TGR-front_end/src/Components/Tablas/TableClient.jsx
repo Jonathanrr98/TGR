@@ -17,15 +17,16 @@ import ModalPago from "../Modals/ModalPago";
 import ModalCliente from "../Modals/ModalCliente";
 import ModalEliminarCliente from "../Modals/ModalEliminarCliente";
 import { ModalEditarCliente } from "../Modals/ModalEditarCliente";
+import { useState } from "react";
 
-function createData(name, pagago, mail, telefono, direccion, price) {
+function createData(name, pagago, mail, telefono, direccion, id) {
   return {
     name,
     pagago,
     telefono,
     mail,
     direccion,
-    price,
+    id,
 
     cliente1: [
       {
@@ -46,9 +47,8 @@ function createData(name, pagago, mail, telefono, direccion, price) {
   };
 }
 
-function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
+function Row({ row, eliminarPorId }) {
+  const [open, setOpen] = useState(false);
 
   return (
     <React.Fragment>
@@ -108,7 +108,7 @@ function Row(props) {
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          <ModalEliminarCliente />
+          <ModalEliminarCliente row={row} eliminarPorId={eliminarPorId} />
         </TableCell>
       </TableRow>
       <TableRow>
@@ -219,68 +219,39 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
-const rows = [
-  createData(
-    "Juan Perez",
-    " 50/100",
-    " mail@asd.com",
-    "+" + 18983589139,
-    "98, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-  createData(
-    "Pepe Perez",
-    " 50/100",
-    " mail2@asd.com",
-    "+" + 5358419139,
-    "3, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-  createData(
-    "Frank Perez",
-    " 50/100",
-    " mail3@asd.com",
-    "+" + 5358419139,
-    "8, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-  createData(
-    "Jose Perez",
-    " 50/100",
-    " mail4@asd.com",
-    "+" + 5358736139,
-    "358, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-  createData(
-    "Luis Perez",
-    " 50/100",
-    " mail5@asd.com",
-    "+" + 53584149932,
-    "28, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-];
-
 export default function TableClient() {
+  const [rows, setRows] = useState([
+    createData(
+      "Juan Perez",
+      " 50/100",
+      " mail@asd.com",
+      "+" + 18983589139,
+      "98, Ave 3ra e/ 4ta Miami Fl",
+      1
+    ),
+    createData(
+      "Juan Perez",
+      " 50/100",
+      " mail@asd.com",
+      "+" + 18983589139,
+      "98, Ave 3ra e/ 4ta Miami Fl",
+      2
+    ),
+
+    createData(
+      "Juan Perez",
+      " 50/100",
+      " mail@asd.com",
+      "+" + 18983589139,
+      "98, Ave 3ra e/ 4ta Miami Fl",
+      3
+    ),
+  ]);
+
+  const eliminarPorId = (id) => {
+    const nuevasFilas = rows.filter((fila) => fila.id !== id);
+    setRows(nuevasFilas);
+  };
   return (
     <>
       <ModalCliente text={"Crear Cliente"} />
@@ -340,8 +311,9 @@ export default function TableClient() {
             {rows.map((row) => (
               <Row
                 sx={{ borderColor: "#694D2C", color: "white" }}
-                key={row.name}
+                key={row.id}
                 row={row}
+                eliminarPorId={eliminarPorId}
               />
             ))}
           </TableBody>

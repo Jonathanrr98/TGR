@@ -12,6 +12,7 @@ import ModalAsignarPaquete from "../Modals/ModalAsignarPaquete";
 import ModalMensajero from "../Modals/ModalMensajero";
 import ModalEliminarMensajero from "../Modals/ModalEliminarMensajero";
 import ModalEditarMensajero from "../Modals/ModalEditarMensajero";
+import { useState } from "react";
 
 function createData(
   Nombre,
@@ -19,7 +20,8 @@ function createData(
   Matricula,
   Provincia,
   Telefono,
-  Movil
+  Movil,
+  id
 ) {
   return {
     Nombre,
@@ -28,11 +30,11 @@ function createData(
     Provincia,
     Telefono,
     Movil,
+    id,
   };
 }
 
-function Row(props) {
-  const { row } = props;
+function Row({ row, eliminarPorId }) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -99,33 +101,48 @@ function Row(props) {
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          <ModalEliminarMensajero />
+          <ModalEliminarMensajero row={row} eliminarPorId={eliminarPorId} />
         </TableCell>
       </TableRow>
     </React.Fragment>
   );
 }
-const rows = [
-  createData(
-    "Pedro Hernandez",
-    " 32",
-    "P34070",
-    "La Habana",
-    "78976787",
-    "53467676"
-  ),
-  createData("Juan Gomez", " 15", "P32232", "Holguín", "73324787", "55767636"),
-  createData(
-    "Manuel Reina",
-    " 27",
-    "P0982",
-    "Las Tunas",
-    "78493787",
-    "52367676"
-  ),
-];
 
 export default function TableMensajeros() {
+  const [rows, setRows] = useState([
+    createData(
+      "Pedro Hernandez",
+      " 32",
+      "P34070",
+      "La Habana",
+      "78976787",
+      "53467676",
+      1
+    ),
+    createData(
+      "Juan Gomez",
+      " 15",
+      "P32232",
+      "Holguín",
+      "73324787",
+      "55767636",
+      2
+    ),
+    createData(
+      "Manuel Reina",
+      " 27",
+      "P0982",
+      "Las Tunas",
+      "78493787",
+      "52367676",
+      3
+    ),
+  ]);
+
+  const eliminarPorId = (id) => {
+    const nuevasFilas = rows.filter((fila) => fila.id !== id);
+    setRows(nuevasFilas);
+  };
   return (
     <>
       <Grid
@@ -202,6 +219,7 @@ export default function TableMensajeros() {
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 key={row.Correo}
                 row={row}
+                eliminarPorId={eliminarPorId}
               />
             ))}
           </TableBody>

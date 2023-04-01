@@ -13,15 +13,17 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useState } from "react";
+import { ModalEliminarHBL } from "../Modals/ModalEliminarHBL";
 
-function createData(name, pagago, mail, telefono, direccion, price) {
+function createData(name, pagago, mail, telefono, direccion, id) {
   return {
     name,
     pagago,
     telefono,
     mail,
     direccion,
-    price,
+    id,
 
     history: [
       {
@@ -40,8 +42,7 @@ function createData(name, pagago, mail, telefono, direccion, price) {
   };
 }
 
-function Row(props) {
-  const { row } = props;
+function Row({ row, eliminarPorId }) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -89,6 +90,18 @@ function Row(props) {
           align='center'
         >
           {row.direccion}
+        </TableCell>
+        <TableCell
+          sx={{ color: "white", borderColor: "#694D2C" }}
+          align='center'
+        >
+          Editar
+        </TableCell>
+        <TableCell
+          sx={{ color: "white", borderColor: "#694D2C" }}
+          align='center'
+        >
+          <ModalEliminarHBL />
         </TableCell>
       </TableRow>
       <TableRow>
@@ -173,68 +186,39 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
-const rows = [
-  createData(
-    "Juan Perez",
-    " 50/100",
-    " mail@asd.com",
-    "+" + 18983589139,
-    "98, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-  createData(
-    "Pepe Perez",
-    " 50/100",
-    " mail2@asd.com",
-    "+" + 5358419139,
-    "3, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-  createData(
-    "Frank Perez",
-    " 50/100",
-    " mail3@asd.com",
-    "+" + 5358419139,
-    "8, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-  createData(
-    "Jose Perez",
-    " 50/100",
-    " mail4@asd.com",
-    "+" + 5358736139,
-    "358, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-  createData(
-    "Luis Perez",
-    " 50/100",
-    " mail5@asd.com",
-    "+" + 53584149932,
-    "28, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-];
-
 export default function TableHBL() {
+  const [rows, setRows] = useState([
+    createData(
+      "Frank Perez",
+      " 50/100",
+      " mail3@asd.com",
+      "+" + 5358419139,
+      "8, Ave 3ra e/ 4ta Miami Fl",
+      1
+    ),
+    createData(
+      "Jose Perez",
+      " 50/100",
+      " mail4@asd.com",
+      "+" + 5358736139,
+      "358, Ave 3ra e/ 4ta Miami Fl",
+      2
+    ),
+    createData(
+      "Luis Perez",
+      " 50/100",
+      " mail5@asd.com",
+      "+" + 53584149932,
+      "28, Ave 3ra e/ 4ta Miami Fl",
+      3
+    ),
+  ]);
+
+  const eliminarPorId = (id) => {
+    const nuevasFilas = rows.filter((fila) => fila.id !== id);
+    setRows(nuevasFilas);
+  };
+
   return (
     <>
       <TableContainer
@@ -272,6 +256,18 @@ export default function TableHBL() {
               >
                 Dirección
               </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Editar
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Eliminar
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody sx={{ borderColor: "#694D2C", color: "white" }}>
@@ -280,6 +276,7 @@ export default function TableHBL() {
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 key={row.name}
                 row={row}
+                eliminarPorId={eliminarPorId}
               />
             ))}
           </TableBody>

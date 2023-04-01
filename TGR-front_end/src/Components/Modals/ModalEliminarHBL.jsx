@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Container, Grid, Modal, Typography } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
-export default function ModalEliminarMensajero({ row, eliminarPorId }) {
+export default function ModalEliminarHBL({ row, eliminarPorId }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -77,7 +77,7 @@ export default function ModalEliminarMensajero({ row, eliminarPorId }) {
                 }}
                 variant='h6'
               >
-                ¿Está seguro que desea eliminar este Mensajero?
+                ¿Está seguro que desea eliminar este HBL?
               </Typography>
 
               <Container

@@ -3,14 +3,15 @@ import { useState } from "react";
 import { Button, Container, Grid, Modal, Typography } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
-export default function ModalEliminarContenedor({ text }) {
+export default function ModalEliminarContenedor({ row, eliminarPorId }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleDelete = () => {
-    // TODO: Implement delete functionality
+  const handleDelete = (e) => {
+    console.log(row.id);
+    eliminarPorId(row.id);
     handleClose();
   };
 

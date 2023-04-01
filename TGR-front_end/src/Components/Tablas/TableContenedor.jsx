@@ -15,14 +15,23 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ModalFormContenedores from "../Modals/ModalFormContenedores";
 import ModalEliminarContenedor from "../Modals/ModalEliminarContenedor";
 import { ModalEditarContenedores } from "../Modals/ModalEditarContenedores";
+import { useState } from "react";
 
-function createData(Contenedor, CanidadPaquetes, Peso, EstadoGeneral, Numero) {
+function createData(
+  Contenedor,
+  CanidadPaquetes,
+  Peso,
+  EstadoGeneral,
+  Numero,
+  id
+) {
   return {
     Contenedor,
     CanidadPaquetes,
     Peso,
     EstadoGeneral,
     Numero,
+    id,
 
     history: [
       {
@@ -35,8 +44,7 @@ function createData(Contenedor, CanidadPaquetes, Peso, EstadoGeneral, Numero) {
   };
 }
 
-function Row(props) {
-  const { row } = props;
+function Row({ row, eliminarPorId }) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -95,7 +103,7 @@ function Row(props) {
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          <ModalEliminarContenedor />
+          <ModalEliminarContenedor row={row} eliminarPorId={eliminarPorId} />
         </TableCell>
       </TableRow>
       <TableRow>
@@ -196,31 +204,38 @@ function Row(props) {
   );
 }
 
-const rows = [
-  createData(
-    "#",
-    " 550",
-    " 220",
-    "Rumbo habana-Dominicana_Florida",
-    "+52836826"
-  ),
-  createData(
-    "#",
-    " 550",
-    " 220",
-    "Rumbo habana-Dominicana_Florida",
-    "+52836826"
-  ),
-  createData(
-    "#",
-    " 550",
-    " 220",
-    "Rumbo habana-Dominicana_Florida",
-    "+52836826"
-  ),
-];
-
 export default function TableContenedor() {
+  const [rows, setRows] = useState([
+    createData(
+      "#",
+      " 550",
+      " 220",
+      "Rumbo habana-Dominicana_Florida",
+      "+52836826",
+      1
+    ),
+    createData(
+      "#",
+      " 550",
+      " 220",
+      "Rumbo habana-Dominicana_Florida",
+      "+52836826",
+      2
+    ),
+    createData(
+      "#",
+      " 550",
+      " 220",
+      "Rumbo habana-Dominicana_Florida",
+      "+52836826",
+      3
+    ),
+  ]);
+
+  const eliminarPorId = (id) => {
+    const nuevasFilas = rows.filter((fila) => fila.id !== id);
+    setRows(nuevasFilas);
+  };
   return (
     <>
       <ModalFormContenedores text={"Crear Contenedor"} />
@@ -281,6 +296,7 @@ export default function TableContenedor() {
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 key={row.Contenedor}
                 row={row}
+                eliminarPorId={eliminarPorId}
               />
             ))}
           </TableBody>

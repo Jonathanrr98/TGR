@@ -10,21 +10,30 @@ import { Container, Grid } from "@mui/material";
 import ModalAdmin from "../Modals/ModalAdmin";
 import { ModalEditarAdmin } from "../Modals/ModalEditarAdmin";
 import ModalEliminarAdministrador from "../Modals/ModalEliminarAdministrador";
+import { useState } from "react";
 
-function createData(Correo, Contrasena, JWT, TipoPermiso, RecuperarContrasena) {
+// Definimos la función que crea las filas
+function createData(
+  Correo,
+  Contrasena,
+  JWT,
+  TipoPermiso,
+  RecuperarContrasena,
+  id
+) {
   return {
     Correo,
     Contrasena,
     JWT,
     TipoPermiso,
     RecuperarContrasena,
+    id,
   };
 }
 
-function Row(props) {
-  const { row } = props;
+// Definimos la función que renderiza cada fila
+function Row({ row, eliminarPorId }) {
   const [open, setOpen] = React.useState(false);
-
   return (
     <React.Fragment>
       <TableRow
@@ -80,37 +89,46 @@ function Row(props) {
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          <ModalEliminarAdministrador />
+          <ModalEliminarAdministrador row={row} eliminarPorId={eliminarPorId} />
         </TableCell>
       </TableRow>
     </React.Fragment>
   );
 }
-const rows = [
-  createData(
-    "correo1@gmail.com",
-    " pass",
-    "jwt+++",
-    "administrador1",
-    "Recuperar Contraseña"
-  ),
-  createData(
-    "correo2@gmail.com",
-    " pass2",
-    "jwt+++",
-    "administrador2",
-    "Recuperar Contraseña"
-  ),
-  createData(
-    "correo31@gmail.com",
-    " pass3",
-    "jwt+++",
-    "administrador1",
-    "Recuperar Contraseña"
-  ),
-];
 
 export default function TableAdmin() {
+  const [rows, setRows] = useState([
+    createData(
+      "correo1@gmail.com",
+      "pass",
+      "jwt+++",
+      "administrador1",
+      "Recuperar Contraseña",
+      1
+    ),
+    createData(
+      "correo2@gmail.com",
+      "pass",
+      "jwt+++",
+      "administrador2",
+      "Recuperar Contraseña",
+      2
+    ),
+    createData(
+      "correo3@gmail.com",
+      "pass",
+      "jwt+++",
+      "administrador3",
+      "Recuperar Contraseña",
+      3
+    ),
+  ]);
+
+  const eliminarPorId = (id) => {
+    const nuevasFilas = rows.filter((fila) => fila.id !== id);
+    setRows(nuevasFilas);
+  };
+
   return (
     <>
       <Grid container spacing={2}>
@@ -170,7 +188,11 @@ export default function TableAdmin() {
                 </TableHead>
                 <TableBody sx={{ borderColor: "#694D2C", color: "white" }}>
                   {rows.map((row) => (
-                    <Row key={row.Correo} row={row} />
+                    <Row
+                      key={row.Correo}
+                      row={row}
+                      eliminarPorId={eliminarPorId}
+                    />
                   ))}
                 </TableBody>
               </Table>
