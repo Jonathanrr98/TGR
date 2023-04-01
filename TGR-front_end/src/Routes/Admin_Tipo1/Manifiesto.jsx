@@ -106,6 +106,7 @@ export const Manifiesto = () => {
   return (
     <>
       <Grid
+        direction={"row-reverse"}
         container
         spacing={{ xs: 2, md: 3 }}
         justifyContent='space-between'

@@ -1,41 +1,21 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import { Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import { Input, Typography } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-const style = {
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 800,
-  height: 400,
-  bgcolor: "#252525",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-  color: "#ffff",
-};
+import Button from "@mui/material/Button";
+import { Grid, Input, Typography } from "@mui/material";
 
-export default function ModalEditarMensajero() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+export const FormularioEditarAdministrador = ({ handleClose }) => {
   const [formData, setFormData] = React.useState({
     /////// ****1/2****/////////////////
-    Nombre: "",
-    Contacto: "",
-    Matricula: "",
+    Correo: "",
+    Contrasena: "",
+    JWT: "",
 
     ///////****2/2****//////////////////
-    Direccion: "",
-    Provincia: "",
-    Municipio: "",
+    RecuperarContrasena: "",
+    TipoPermiso: "",
   });
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -46,6 +26,7 @@ export default function ModalEditarMensajero() {
     });
   };
 
+  const cerrarModal = () => handleClose();
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
@@ -63,12 +44,21 @@ export default function ModalEditarMensajero() {
     {
       label: "Información 1/2",
       content: (
-        <Grid container spacing={0} columns={12}>
-          <Grid container sx={{}}>
-            <Grid xs={12}>
+        <Box sx={{ flexGrow: 1, maxWidth: 900 }}>
+          <Grid
+            container
+            spacing={1}
+            columns={16}
+            sx={{
+              maxWidth: 1200,
+              maxHeight: 500,
+              borderRadius: 10,
+            }}
+          >
+            <Grid item xs={16}>
               <Input
                 disableUnderline
-                placeholder='Nombre'
+                placeholder='Correo'
                 sx={{
                   display: "flex",
                   px: 2,
@@ -79,9 +69,9 @@ export default function ModalEditarMensajero() {
                   borderColor: "#fff",
                   color: "#ffff",
                 }}
-                label='Nombre'
-                name='Nombre'
-                value={formData.Nombre}
+                label='Correo'
+                name='Correo'
+                value={formData.Correo}
                 onChange={(e) =>
                   setFormData({ ...formData, Nombre: e.target.value })
                 }
@@ -89,7 +79,7 @@ export default function ModalEditarMensajero() {
 
               <Input
                 disableUnderline
-                placeholder='Contacto'
+                placeholder='Contraseña'
                 sx={{
                   display: "flex",
                   px: 2,
@@ -100,16 +90,16 @@ export default function ModalEditarMensajero() {
                   borderColor: "#fff",
                   color: "#ffff",
                 }}
-                label='Contacto'
-                name='Contacto'
-                value={formData.Contacto}
+                label='Contrasena'
+                name='Contrasena'
+                value={formData.Contrasena}
                 onChange={(e) =>
                   setFormData({ ...formData, Contacto: e.target.value })
                 }
               />
               <Input
                 disableUnderline
-                placeholder='Matrícula'
+                placeholder='JWT'
                 sx={{
                   display: "flex",
                   px: 2,
@@ -120,15 +110,14 @@ export default function ModalEditarMensajero() {
                   borderColor: "#fff",
                   color: "#ffff",
                 }}
-                label='Matricula'
-                name='Matricula'
-                value={formData.Matricula}
+                label='JWT'
+                name='JWT'
+                value={formData.JWT}
                 onChange={(e) =>
                   setFormData({ ...formData, Matricula: e.target.value })
                 }
               />
             </Grid>
-
             <Grid
               container
               spacing={2}
@@ -139,14 +128,14 @@ export default function ModalEditarMensajero() {
               flexDirection='row'
             >
               <Grid item>
-                <Button onClick={handleClose}>Cancelar</Button>
+                <Button onClick={cerrarModal}>Cancelar</Button>
               </Grid>
               <Grid item>
-                <Button onClick={handleNext}>Siguiente</Button>
+                <Button onClick={handleNext}>Sigiente</Button>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Box>
       ),
     },
     {
@@ -166,7 +155,7 @@ export default function ModalEditarMensajero() {
             <Grid item xs={16}>
               <Input
                 disableUnderline
-                placeholder='Dirección'
+                placeholder='Recuperar Contraseña'
                 sx={{
                   display: "flex",
                   px: 2,
@@ -177,9 +166,9 @@ export default function ModalEditarMensajero() {
                   borderColor: "#fff",
                   color: "#ffff",
                 }}
-                label='Direccion'
-                name='Direccion'
-                value={formData.Direccion}
+                label='RecuperarContrasena'
+                name='RecuperarContrasena'
+                value={formData.RecuperarContrasena}
                 onChange={(e) =>
                   setFormData({ ...formData, Direccion: e.target.value })
                 }
@@ -187,7 +176,7 @@ export default function ModalEditarMensajero() {
 
               <Input
                 disableUnderline
-                placeholder='Provincia'
+                placeholder='Tipo de Permiso'
                 sx={{
                   display: "flex",
                   px: 2,
@@ -198,9 +187,9 @@ export default function ModalEditarMensajero() {
                   borderColor: "#fff",
                   color: "#ffff",
                 }}
-                label='Provincia'
-                name='Provincia'
-                value={formData.Provincia}
+                label='TipoPermiso'
+                name='TipoPermiso'
+                value={formData.TipoPermiso}
                 onChange={(e) =>
                   setFormData({ ...formData, Provincia: e.target.value })
                 }
@@ -240,7 +229,7 @@ export default function ModalEditarMensajero() {
                 <Button onClick={handleBack}>Atrás</Button>
               </Grid>
               <Grid item>
-                <Button onClick={handleClose}>Cancelar</Button>
+                <Button onClick={cerrarModal}>Cancelar</Button>
               </Grid>
               <Grid item>
                 <Button
@@ -258,88 +247,37 @@ export default function ModalEditarMensajero() {
     },
   ];
   const currentStep = steps[activeStep].content;
-
   return (
-    <div>
-      <Grid
+    <>
+      <Typography
+        variant='h4'
         sx={{
+          mx: 3,
           display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "center",
+          justifyContent: "center",
+          mb: 5,
         }}
       >
-        <EditIcon
-          onClick={handleOpen}
-          sx={{
-            ":hover": {
-              color: "#CF7A17",
-              cursor: "pointer",
-            },
-          }}
-        />
-      </Grid>
-      <Modal
-        sx={{}}
-        open={open}
-        onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
-        <Grid
-          container
-          spacing={0}
-          direction='column'
-          alignItems='center'
-          justifyContent='center'
-          style={{ minHeight: "100vh" }}
-        >
-          <Grid
-            item
-            sx={{
-              top: "50%",
-              left: "50%",
+        {" "}
+        Editar Administrador
+      </Typography>
+      <Stepper activeStep={activeStep}>
+        {steps.map((step) => (
+          <Step key={step.label}>
+            <StepLabel
+              sx={{
+                backgroundColor: "#ffff",
+                p: 1,
+                borderRadius: 20,
+              }}
+            >
+              {step.label}
+            </StepLabel>
+          </Step>
+        ))}
+      </Stepper>
 
-              bgcolor: "#252525",
-              border: "2px solid #000",
-              boxShadow: 24,
-              p: 4,
-              color: "#ffff",
-            }}
-          >
-            <>
-              <Typography
-                variant='h4'
-                sx={{
-                  mx: 3,
-                  display: "flex",
-                  justifyContent: "center",
-                  mb: 5,
-                }}
-              >
-                {" "}
-                Editar Mensajero
-              </Typography>
-              <Stepper activeStep={activeStep}>
-                {steps.map((step) => (
-                  <Step key={step.label}>
-                    <StepLabel
-                      sx={{
-                        backgroundColor: "#ffff",
-                        p: 1,
-                        borderRadius: 20,
-                      }}
-                    >
-                      {step.label}
-                    </StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-
-              {currentStep}
-            </>
-          </Grid>
-        </Grid>
-      </Modal>
-    </div>
+      {currentStep}
+    </>
   );
-}
+};

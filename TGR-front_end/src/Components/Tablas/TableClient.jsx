@@ -16,6 +16,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ModalPago from "../Modals/ModalPago";
 import ModalCliente from "../Modals/ModalCliente";
 import ModalEliminarCliente from "../Modals/ModalEliminarCliente";
+import { ModalEditarCliente } from "../Modals/ModalEditarCliente";
 
 function createData(name, pagago, mail, telefono, direccion, price) {
   return {
@@ -100,7 +101,7 @@ function Row(props) {
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          Editar
+          <ModalEditarCliente />
         </TableCell>
 
         <TableCell

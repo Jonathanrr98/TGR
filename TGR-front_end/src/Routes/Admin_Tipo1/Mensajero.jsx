@@ -108,6 +108,7 @@ export const Mensajero = () => {
     <>
       <Grid
         container
+        direction={"row-reverse"}
         spacing={{ xs: 2, md: 3 }}
         justifyContent='space-between'
         alignItems='center'

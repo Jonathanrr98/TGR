@@ -4,11 +4,15 @@ import TextField from "@mui/material/TextField";
 import { Button, MenuItem, Select, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 
-export default function FormContenedores() {
+export default function FormContenedores({ handleClose }) {
   const [manifiesto, setManifiesto] = React.useState("");
 
   const handleChange = (event) => {
     setManifiesto(event.target.value);
+  };
+
+  const cerrarModal = (event) => {
+    handleClose();
   };
 
   return (
@@ -51,7 +55,7 @@ export default function FormContenedores() {
           variant='contained'
           color='error'
           sx={{ mr: 1 }}
-          onClick={() => {}}
+          onClick={cerrarModal}
         >
           Cancelar
         </Button>

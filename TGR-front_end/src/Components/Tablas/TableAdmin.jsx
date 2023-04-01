@@ -113,25 +113,25 @@ const rows = [
 export default function TableAdmin() {
   return (
     <>
-      <ModalAdmin text={"Crear Administrador"} />
-      <Grid display={""} container spacing={2} sx={{}}>
-        <Grid display={""} item xs={12} sx={{}}>
-          <Container sx={{}}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Container>
+            <ModalAdmin />
             <TableContainer
               sx={{ backgroundColor: "#252525", borderColor: "#694D2C" }}
             >
               <Table
                 sx={{ borderColor: "#694D2C" }}
-                aria-label='collapsible table'
+                ariaLabel='collapsible table'
               >
-                <TableHead sx={{ maxHeight: 10, background: "#0F0F0F" }}>
+                <TableHead sx={{ background: "#0F0F0F" }}>
                   <TableRow sx={{ borderColor: "#694D2C" }}>
                     <TableCell sx={{ borderColor: "#694D2C" }} />
                     <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
                       Correo
                     </TableCell>
                     <TableCell
-                      style={{ borderColor: "#694D2C", color: "white" }}
+                      sx={{ borderColor: "#694D2C", color: "white" }}
                       align='center'
                     >
                       Contraseña
@@ -148,7 +148,6 @@ export default function TableAdmin() {
                     >
                       Tipo de Permiso
                     </TableCell>
-
                     <TableCell
                       sx={{ borderColor: "#694D2C", color: "white" }}
                       align='center'
@@ -161,7 +160,6 @@ export default function TableAdmin() {
                     >
                       Editar
                     </TableCell>
-
                     <TableCell
                       sx={{ borderColor: "#694D2C", color: "white" }}
                       align='center'
@@ -172,11 +170,7 @@ export default function TableAdmin() {
                 </TableHead>
                 <TableBody sx={{ borderColor: "#694D2C", color: "white" }}>
                   {rows.map((row) => (
-                    <Row
-                      sx={{ borderColor: "#694D2C", color: "white" }}
-                      key={row.Correo}
-                      row={row}
-                    />
+                    <Row key={row.Correo} row={row} />
                   ))}
                 </TableBody>
               </Table>

@@ -6,7 +6,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import { Grid, Input, Typography } from "@mui/material";
 
-export const FMMensajero = () => {
+export const FMMensajero = ({ handleClose }) => {
   const [formData, setFormData] = React.useState({
     /////// ****1/2****/////////////////
     Nombre: "",
@@ -36,7 +36,7 @@ export const FMMensajero = () => {
     setActiveStep(activeStep + 1);
   };
 
-  const handleClose = () => setOpen(false);
+  const cerrarModal = () => handleClose();
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);

@@ -6,7 +6,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import { Grid, Input, Typography } from "@mui/material";
 
-export const FMAdmin = () => {
+export const FMAdmin = ({ handleClose }) => {
   const [formData, setFormData] = React.useState({
     /////// ****1/2****/////////////////
     Correo: "",
@@ -26,7 +26,7 @@ export const FMAdmin = () => {
     });
   };
 
-  const handleClose = () => setOpen(false);
+  const cerrarModal = () => handleClose();
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);

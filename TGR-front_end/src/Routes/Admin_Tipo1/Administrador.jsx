@@ -108,6 +108,7 @@ export const Administrador = () => {
   return (
     <>
       <Grid
+        direction={"row-reverse"}
         container
         spacing={{ xs: 2, md: 3 }}
         justifyContent='space-between'
@@ -263,7 +264,9 @@ export const Administrador = () => {
               alignItems: "center",
             }}
           >
-            <main>{<TableAdmin />}</main>
+            <Grid item container>
+              {<TableAdmin />}
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

@@ -14,6 +14,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ModalFormContenedores from "../Modals/ModalFormContenedores";
 import ModalEliminarContenedor from "../Modals/ModalEliminarContenedor";
+import { ModalEditarContenedores } from "../Modals/ModalEditarContenedores";
 
 function createData(Contenedor, CanidadPaquetes, Peso, EstadoGeneral, Numero) {
   return {
@@ -88,7 +89,7 @@ function Row(props) {
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          Editar
+          <ModalEditarContenedores />
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}

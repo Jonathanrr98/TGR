@@ -11,6 +11,7 @@ import { Grid } from "@mui/material";
 import ModalAsignarPaquete from "../Modals/ModalAsignarPaquete";
 import ModalMensajero from "../Modals/ModalMensajero";
 import ModalEliminarMensajero from "../Modals/ModalEliminarMensajero";
+import ModalEditarMensajero from "../Modals/ModalEditarMensajero";
 
 function createData(
   Nombre,
@@ -91,7 +92,7 @@ function Row(props) {
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          Editar
+          <ModalEditarMensajero />
         </TableCell>
 
         <TableCell

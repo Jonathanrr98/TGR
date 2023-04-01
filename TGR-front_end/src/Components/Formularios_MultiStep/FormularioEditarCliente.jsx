@@ -6,7 +6,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import { Grid, Input, Typography } from "@mui/material";
 
-export const FMCliente = ({ closeModal }) => {
+export const FormularioEditarCliente = ({ handleClose }) => {
   const [formData, setFormData] = React.useState({
     ///////Remitente//////////////////
     Nombre: "",
@@ -44,11 +44,9 @@ export const FMCliente = ({ closeModal }) => {
   };
 
   const cerrarModal = (event) => {
-    closeModal();
+    handleClose();
   };
-  const handleClose = (event) => {
-    setIsOpen(false);
-  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
@@ -618,7 +616,7 @@ export const FMCliente = ({ closeModal }) => {
         }}
       >
         {" "}
-        Crear Cliente
+        Editar Cliente
       </Typography>
       <Stepper activeStep={activeStep}>
         {steps.map((step) => (

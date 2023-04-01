@@ -23,6 +23,9 @@ export default function ModalCliente({ text }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const closeModal = () => {
+    setOpen(false);
+  };
   return (
     <div>
       <Grid
@@ -79,7 +82,7 @@ export default function ModalCliente({ text }) {
               color: "#ffff",
             }}
           >
-            <FMCliente />
+            <FMCliente closeModal={closeModal} />
           </Grid>
         </Grid>
       </Modal>

@@ -65,7 +65,7 @@ export default function ModalMensajero({ text }) {
               color: "#ffff",
             }}
           >
-            <FMMensajero />
+            <FMMensajero handleClose={handleClose} />
           </Grid>
         </Grid>
       </Modal>
