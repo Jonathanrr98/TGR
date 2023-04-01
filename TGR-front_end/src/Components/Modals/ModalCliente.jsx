@@ -1,9 +1,9 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import { Grid } from "@mui/material";
 
-import { Grid, Modal } from "@mui/material";
-import FormMultiStep from "./FormClienteMS";
-import FormContenedores from "./FormContenedores";
+import { FMCliente } from "../Formularios_MultiStep/FMCliente";
 
 const style = {
   top: "50%",
@@ -18,7 +18,7 @@ const style = {
   color: "#ffff",
 };
 
-export default function ModalContenedores({ text }) {
+export default function ModalCliente({ text }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -79,7 +79,7 @@ export default function ModalContenedores({ text }) {
               color: "#ffff",
             }}
           >
-            <FormContenedores />
+            <FMCliente />
           </Grid>
         </Grid>
       </Modal>

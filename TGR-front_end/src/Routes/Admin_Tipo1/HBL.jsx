@@ -13,16 +13,17 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
-import IconClient from "../assets/icons/Clientes.png";
-import IconAdmin from "../assets/icons/Administradores.png";
-import IconCSesion from "../assets/icons/CerrarSesion.png";
-import IconContenedores from "../assets/icons/Contenedores.png";
-import IconHBL from "../assets/icons/HBL.png";
-import IconManifiesto from "../assets/icons/Manifiesto.png";
-import IconMensajero from "../assets/icons/Mensajeros.png";
-import { Button, Grid } from "@mui/material";
+import IconClient from "../../assets/icons/Clientes.png";
+import IconAdmin from "../../assets/icons/Administradores.png";
+import IconCSesion from "../../assets/icons/CerrarSesion.png";
+import IconContenedores from "../../assets/icons/Contenedores.png";
+import IconHBL from "../../assets/icons/HBL.png";
+import IconManifiesto from "../../assets/icons/Manifiesto.png";
+import IconMensajero from "../../assets/icons/Mensajeros.png";
+
+import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Boton } from "../Components/Boton";
+import TableHBL from "../../Components/Tablas/TableHBL";
 
 const drawerWidth = 240;
 
@@ -92,7 +93,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export const Manifiesto = () => {
+export const HBL = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -109,7 +110,6 @@ export const Manifiesto = () => {
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
-        direction='row-reverse'
         justifyContent='space-between'
         alignItems='center'
       >
@@ -263,26 +263,10 @@ export const Manifiesto = () => {
               alignItems: "center",
             }}
           >
-            <main>
-              {
-                <Button
-                  sx={{
-                    backgroundColor: "#CF7A17",
-                    color: "#ffff",
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: 24,
-                  }}
-                >
-                  Crear Manifiesto
-                </Button>
-              }{" "}
-            </main>
+            <main>{<TableHBL />}</main>
           </Grid>
         </Grid>
       </Grid>
     </>
   );
 };
-
-export default MailIcon;

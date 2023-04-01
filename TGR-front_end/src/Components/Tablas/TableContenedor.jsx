@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -13,31 +12,23 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Grid } from "@mui/material";
-import ModalAsignarPaquete from "./ModalAsignarPaquete";
-import ModalMensajero from "./ModalMensajero";
+import ModalFormContenedores from "../Modals/ModalFormContenedores";
+import ModalEliminarContenedor from "../Modals/ModalEliminarContenedor";
 
-function createData(name, pagago, mail, telefono, direccion, price) {
+function createData(Contenedor, CanidadPaquetes, Peso, EstadoGeneral, Numero) {
   return {
-    name,
-    pagago,
-    telefono,
-    mail,
-    direccion,
-    price,
+    Contenedor,
+    CanidadPaquetes,
+    Peso,
+    EstadoGeneral,
+    Numero,
 
     history: [
       {
-        dni_pasaporte: "L3782",
-        provincia: "La Habana",
-        municipio: "Playa",
-        ci: "957678965",
-      },
-      {
-        dni_pasaporte: "F7654",
-        provincia: "Granma",
-        municipio: "Bayamo",
-        ci: "875654890",
+        Paquetes: "Cortina",
+        Pesokg: "22",
+        Contenedor: "KL6764",
+        HBL: "30804548255",
       },
     ],
   };
@@ -67,31 +58,43 @@ function Row(props) {
           component='th'
           scope='row'
         >
-          {row.name}
+          {row.Contenedor}
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          {row.pagago}
+          {row.CanidadPaquetes}
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          {row.mail}
+          {row.Peso}
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='right'
         >
-          {row.telefono}
+          {row.EstadoGeneral}
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          {row.direccion}
+          {row.Numero}
+        </TableCell>
+        <TableCell
+          sx={{ color: "white", borderColor: "#694D2C" }}
+          align='center'
+        >
+          Editar
+        </TableCell>
+        <TableCell
+          sx={{ color: "white", borderColor: "#694D2C" }}
+          align='center'
+        >
+          <ModalEliminarContenedor />
         </TableCell>
       </TableRow>
       <TableRow>
@@ -118,23 +121,31 @@ function Row(props) {
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
                     <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      DNI / Pasaporte
+                      Paquetes Producto Enviado
                     </TableCell>
                     <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      Provincia
+                      Peso (Kg)
                     </TableCell>
                     <TableCell
                       sx={{ color: "white", borderColor: "#694D2C" }}
                       align='center'
                     >
-                      Municipio
+                      Contenedor
                     </TableCell>
                     <TableCell
                       sx={{ color: "white", borderColor: "#694D2C" }}
                       align='center'
                     >
-                      No. deCarnet de Identidad
+                      HBL
                     </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    ></TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    ></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -145,25 +156,33 @@ function Row(props) {
                         component='th'
                         scope='row'
                       >
-                        {historyRow.dni_pasaporte}
+                        {historyRow.Paquetes}
                       </TableCell>
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
                       >
-                        {historyRow.provincia}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {historyRow.municipio}
+                        {historyRow.Pesokg}
                       </TableCell>
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
                         align='center'
                       >
-                        {historyRow.ci}
+                        {historyRow.Contenedor}
                       </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {historyRow.HBL}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      ></TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      ></TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -176,81 +195,34 @@ function Row(props) {
   );
 }
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
 const rows = [
   createData(
-    "Juan Perez",
-    " 50/100",
-    " mail@asd.com",
-    "+" + 18983589139,
-    "98, Ave 3ra e/ 4ta Miami Fl",
-    3.99
+    "#",
+    " 550",
+    " 220",
+    "Rumbo habana-Dominicana_Florida",
+    "+52836826"
   ),
   createData(
-    "Pepe Perez",
-    " 50/100",
-    " mail2@asd.com",
-    "+" + 5358419139,
-    "3, Ave 3ra e/ 4ta Miami Fl",
-    3.99
+    "#",
+    " 550",
+    " 220",
+    "Rumbo habana-Dominicana_Florida",
+    "+52836826"
   ),
   createData(
-    "Frank Perez",
-    " 50/100",
-    " mail3@asd.com",
-    "+" + 5358419139,
-    "8, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-  createData(
-    "Jose Perez",
-    " 50/100",
-    " mail4@asd.com",
-    "+" + 5358736139,
-    "358, Ave 3ra e/ 4ta Miami Fl",
-    3.99
-  ),
-  createData(
-    "Luis Perez",
-    " 50/100",
-    " mail5@asd.com",
-    "+" + 53584149932,
-    "28, Ave 3ra e/ 4ta Miami Fl",
-    3.99
+    "#",
+    " 550",
+    " 220",
+    "Rumbo habana-Dominicana_Florida",
+    "+52836826"
   ),
 ];
 
-export default function TableMensajeros() {
+export default function TableContenedor() {
   return (
     <>
-      <Grid
-        sx={{
-          display: "flex",
-          justifyContent: "end",
-          alignItems: "flex-end",
-        }}
-      >
-        <ModalAsignarPaquete text={"Asignar Paquetes"} />
-
-        <ModalMensajero text={"Crear Mensajero"} />
-      </Grid>
+      <ModalFormContenedores text={"Crear Contenedor"} />
       <TableContainer
         sx={{ backgroundColor: "#252525", borderColor: "#694D2C" }}
         component={Paper}
@@ -260,31 +232,45 @@ export default function TableMensajeros() {
             <TableRow sx={{ borderColor: "#694D2C" }}>
               <TableCell sx={{ borderColor: "#694D2C" }} />
               <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
-                Nombre y Apellido
+                Contenedor
               </TableCell>
               <TableCell
                 style={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
-                PAGAGO
+                Cantidad de Paquetes
               </TableCell>
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
-                Mail
+                Peso (Lb)
               </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Estado General
+              </TableCell>
+
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
                 Número
               </TableCell>
+
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
-                Dirección
+                Editar
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Eliminar
               </TableCell>
             </TableRow>
           </TableHead>
@@ -292,7 +278,7 @@ export default function TableMensajeros() {
             {rows.map((row) => (
               <Row
                 sx={{ borderColor: "#694D2C", color: "white" }}
-                key={row.name}
+                key={row.Contenedor}
                 row={row}
               />
             ))}

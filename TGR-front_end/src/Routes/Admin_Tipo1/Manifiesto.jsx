@@ -1,6 +1,5 @@
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,19 +12,16 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import IconClient from "../assets/icons/Clientes.png";
-import IconAdmin from "../assets/icons/Administradores.png";
-import IconCSesion from "../assets/icons/CerrarSesion.png";
-import IconContenedores from "../assets/icons/Contenedores.png";
-import IconHBL from "../assets/icons/HBL.png";
-import IconManifiesto from "../assets/icons/Manifiesto.png";
-import IconMensajero from "../assets/icons/Mensajeros.png";
-
-import { Container, Grid } from "@mui/material";
+import IconClient from "../../assets/icons/Clientes.png";
+import IconAdmin from "../../assets/icons/Administradores.png";
+import IconCSesion from "../../assets/icons/CerrarSesion.png";
+import IconContenedores from "../../assets/icons/Contenedores.png";
+import IconHBL from "../../assets/icons/HBL.png";
+import IconManifiesto from "../../assets/icons/Manifiesto.png";
+import IconMensajero from "../../assets/icons/Mensajeros.png";
+import { Button, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-import TableAdmin from "../Components/TableAdmin";
 
 const drawerWidth = 240;
 
@@ -95,7 +91,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export const Administrador = () => {
+export const Manifiesto = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -112,7 +108,6 @@ export const Administrador = () => {
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
-        direction='row-reverse'
         justifyContent='space-between'
         alignItems='center'
       >
@@ -266,10 +261,26 @@ export const Administrador = () => {
               alignItems: "center",
             }}
           >
-            <main>{<TableAdmin />}</main>
+            <main>
+              {
+                <Button
+                  sx={{
+                    backgroundColor: "#CF7A17",
+                    color: "#ffff",
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: 24,
+                  }}
+                >
+                  Crear Manifiesto
+                </Button>
+              }{" "}
+            </main>
           </Grid>
         </Grid>
       </Grid>
     </>
   );
 };
+
+export default MailIcon;

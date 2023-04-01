@@ -42,7 +42,9 @@ export const FMCliente = () => {
       [event.target.name]: event.target.value,
     });
   };
-
+  const handleClose = (event) => {
+    setIsOpen(false);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
@@ -208,15 +210,19 @@ export const FMCliente = () => {
             </Grid>
 
             <Grid
-              xs={16}
-              sx={{
-                display: "flex",
-                p: 2,
-              }}
+              container
+              spacing={2}
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              p={2}
+              flexDirection='row'
             >
-              <Grid item xs={15}></Grid>
-              <Grid item xs={1}>
-                <Button onClick={handleNext}>Next</Button>
+              <Grid item>
+                <Button onClick={handleClose}>Cancelar</Button>
+              </Grid>
+              <Grid item>
+                <Button onClick={handleNext}>Siguiente</Button>
               </Grid>
             </Grid>
           </Grid>
@@ -393,17 +399,22 @@ export const FMCliente = () => {
             </Grid>
 
             <Grid
-              xs={16}
-              sx={{
-                display: "flex",
-                p: 2,
-              }}
+              container
+              spacing={2}
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              p={2}
+              flexDirection='row'
             >
-              <Grid item xs={15}>
-                <Button onClick={handleBack}>Back</Button>
+              <Grid item>
+                <Button onClick={handleBack}>Atrás</Button>
               </Grid>
-              <Grid item xs={1}>
-                <Button onClick={handleNext}>Next</Button>
+              <Grid item>
+                <Button onClick={handleClose}>Cancelar</Button>
+              </Grid>
+              <Grid item>
+                <Button onClick={handleNext}>Siguiente</Button>
               </Grid>
             </Grid>
           </Grid>
@@ -561,17 +572,28 @@ export const FMCliente = () => {
             </Grid>
 
             <Grid
-              xs={16}
-              sx={{
-                display: "flex",
-                p: 2,
-              }}
+              container
+              spacing={2}
+              display='flex'
+              justifyContent='center'
+              alignItems='center'
+              p={2}
+              flexDirection='row'
             >
-              <Grid item xs={15}>
-                <Button onClick={handleBack}>Back</Button>
+              <Grid item>
+                <Button onClick={handleBack}>Atrás</Button>
               </Grid>
-              <Grid item xs={1}>
-                <Button onClick={handleSubmit}>Enviar</Button>
+              <Grid item>
+                <Button onClick={handleClose}>Cancelar</Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  onClick={handleSubmit}
+                  variant='contained'
+                  color='primary'
+                >
+                  Enviar
+                </Button>
               </Grid>
             </Grid>
           </Grid>
@@ -592,7 +614,7 @@ export const FMCliente = () => {
         }}
       >
         {" "}
-        Crear Contenedor
+        Crear Cliente
       </Typography>
       <Stepper activeStep={activeStep}>
         {steps.map((step) => (

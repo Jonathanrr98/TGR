@@ -5,7 +5,6 @@ import { Grid, Select, Typography } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { Boton } from "./Boton";
 import { Box, Container } from "@mui/system";
 
 const style = {
@@ -89,12 +88,12 @@ export default function ModalAsignarPaquete({ text }) {
             }}
           >
             <Typography
-              variant='h4'
+              variant='h6'
               sx={{
-                mx: 3,
+                mx: 1,
                 display: "flex",
                 justifyContent: "center",
-                mb: 5,
+                mb: 1,
               }}
             >
               {" "}
@@ -105,14 +104,12 @@ export default function ModalAsignarPaquete({ text }) {
                 sx={{
                   ":focus": {
                     color: "withe",
-                    fontSize: "20px",
-                    fontStyle: "bold",
+                    fontSize: "18px",
                   },
 
                   color: "black",
-                  fontSize: "20px",
+                  fontSize: "18px",
                 }}
-                id='demo-select-small'
               >
                 Paquetes
               </InputLabel>

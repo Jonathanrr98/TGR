@@ -13,12 +13,6 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Button, Container } from "@mui/material";
-import { Boton } from "./Boton";
-import BasicModal from "./ModalCliente";
-import { green } from "@mui/material/colors";
-import ModalPago from "./ModalPago";
-import ModalCliente from "./ModalCliente";
 
 function createData(name, pagago, mail, telefono, direccion, price) {
   return {
@@ -29,20 +23,18 @@ function createData(name, pagago, mail, telefono, direccion, price) {
     direccion,
     price,
 
-    cliente1: [
+    history: [
       {
-        historial: "cortina",
-        peso: "1",
-        contenedor: "k8234kl",
-        HBL: "30804548255",
-        Pago: true,
+        dni_pasaporte: "L3782",
+        provincia: "La Habana",
+        municipio: "Playa",
+        ci: "957678965",
       },
       {
-        historial: "mesa",
-        peso: "3",
-        contenedor: "k2345kl",
-        HBL: "20804548255",
-        pago: false,
+        dni_pasaporte: "F7654",
+        provincia: "Granma",
+        municipio: "Bayamo",
+        ci: "875654890",
       },
     ],
   };
@@ -123,77 +115,51 @@ function Row(props) {
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
                     <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      Historial Producto Enviado
+                      DNI / Pasaporte
                     </TableCell>
                     <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      Peso (KG)
+                      Provincia
                     </TableCell>
                     <TableCell
                       sx={{ color: "white", borderColor: "#694D2C" }}
                       align='center'
                     >
-                      Contenedor
+                      Municipio
                     </TableCell>
                     <TableCell
                       sx={{ color: "white", borderColor: "#694D2C" }}
                       align='center'
                     >
-                      HBL
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      Pago
+                      No. deCarnet de Identidad
                     </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.cliente1.map((historyRow) => (
+                  {row.history.map((historyRow) => (
                     <TableRow key={historyRow.dni_pasaporte}>
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
                         component='th'
                         scope='row'
                       >
-                        {historyRow.historial}
+                        {historyRow.dni_pasaporte}
                       </TableCell>
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
                       >
-                        {historyRow.peso}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {historyRow.contenedor}
+                        {historyRow.provincia}
                       </TableCell>
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
                         align='center'
                       >
-                        {historyRow.HBL}
+                        {historyRow.municipio}
                       </TableCell>
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
                         align='center'
                       >
-                        {historyRow.pago === false ? (
-                          <Typography
-                            //disable pointer hober
-
-                            disableElevation
-                            sx={{
-                              height: 20,
-                              color: "#4caf50",
-                            }}
-                          >
-                            Pagado
-                          </Typography>
-                        ) : (
-                          <ModalPago text={"Pagar"} />
-                        )}
+                        {historyRow.ci}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -268,11 +234,9 @@ const rows = [
   ),
 ];
 
-export default function TableClient() {
+export default function TableHBL2() {
   return (
     <>
-      <ModalCliente text={"Crear Cliente"} />
-
       <TableContainer
         sx={{ backgroundColor: "#252525", borderColor: "#694D2C" }}
         component={Paper}

@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Grid, Input } from "@mui/material";
-import FormMultiStep from "./FormClienteMS";
+import FormMultiStep from "../FormClienteMS";
 import { Container, display } from "@mui/system";
 
 const style = {

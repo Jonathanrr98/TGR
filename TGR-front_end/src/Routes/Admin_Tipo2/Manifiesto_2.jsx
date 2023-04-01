@@ -13,16 +13,14 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
-import IconClient from "../assets/icons/Clientes.png";
-import IconAdmin from "../assets/icons/Administradores.png";
-import IconCSesion from "../assets/icons/CerrarSesion.png";
-import IconContenedores from "../assets/icons/Contenedores.png";
-import IconHBL from "../assets/icons/HBL.png";
-import IconManifiesto from "../assets/icons/Manifiesto.png";
-import IconMensajero from "../assets/icons/Mensajeros.png";
-import { Grid } from "@mui/material";
+import IconAdmin from "../../assets/icons/Administradores.png";
+import IconCSesion from "../../assets/icons/CerrarSesion.png";
+import IconContenedores from "../../assets/icons/Contenedores.png";
+import IconHBL from "../../assets/icons/HBL.png";
+import IconManifiesto from "../../assets/icons/Manifiesto.png";
+import IconMensajero from "../../assets/icons/Mensajeros.png";
 import { Link } from "react-router-dom";
-import TableMensajeros from "../Components/TableMensajeros";
+import { Grid } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -92,7 +90,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export const Mensajero = () => {
+export const Manifiesto_2 = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -156,7 +154,6 @@ export const Mensajero = () => {
 
           <List sx={{ backgroundColor: "#252525", color: "#ffff" }}>
             {[
-              "Clientes",
               "Mensajeros",
               "Administradores",
               "HBL",
@@ -178,18 +175,16 @@ export const Mensajero = () => {
               >
                 <Link
                   to={
-                    text === "Clientes"
-                      ? "/cliente"
-                      : text === "Mensajeros"
-                      ? "/mensajero"
+                    text === "Mensajeros"
+                      ? "/mensajero2"
                       : text === "Administradores"
-                      ? "/administrador"
+                      ? "/admin2"
                       : text === "HBL"
-                      ? "/hbl"
+                      ? "/hbl2"
                       : text === "Manifiesto"
-                      ? "/manifiesto"
+                      ? "/manifiesto2"
                       : text === "Contenedores"
-                      ? "/contenedores"
+                      ? "/contenedores2"
                       : "/"
                   }
                   style={{ textDecoration: "none", color: "#ffff" }}
@@ -210,9 +205,7 @@ export const Mensajero = () => {
                         justifyContent: "center",
                       }}
                     >
-                      {text === "Clientes" ? (
-                        <img src={IconClient} />
-                      ) : text === "Manifiesto" ? (
+                      {text === "Manifiesto" ? (
                         <img src={IconManifiesto} />
                       ) : text === "HBL" ? (
                         <img src={IconHBL} />
@@ -263,7 +256,7 @@ export const Mensajero = () => {
               alignItems: "center",
             }}
           >
-            <main>{<TableMensajeros />}</main>
+            <main>{}</main>
           </Grid>
         </Grid>
       </Grid>

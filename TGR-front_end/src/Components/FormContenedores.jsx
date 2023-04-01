@@ -1,70 +1,40 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Button, Input, MenuItem, Select, Typography } from "@mui/material";
+import { Button, MenuItem, Select, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 
 export default function FormContenedores() {
-  const [Manifiesto, setManifiesto] = React.useState("");
-  const [open, setOpen] = React.useState(false);
+  const [manifiesto, setManifiesto] = React.useState("");
+
   const handleChange = (event) => {
     setManifiesto(event.target.value);
   };
 
-  const handleClose = () => setOpen(false);
-
   return (
-    <Box component='form' noValidate autoComplete='off'>
-      <Typography
-        variant='h4'
-        sx={{
-          mx: 3,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        {" "}
+    <Box component='form' noValidate autoComplete='off' sx={{ p: 3 }}>
+      <Typography variant='h4' sx={{ mx: "auto" }}>
         Crear Contenedor
       </Typography>
 
-      <Input
-        sx={{
-          px: 2,
-          mx: 8,
-          my: 3,
-          border: 1,
-          borderRadius: 32,
-          borderColor: "#fff",
-          color: "#ffff",
-        }}
-        disableUnderline
-        placeholder='Id'
+      <TextField
+        sx={{ my: 3 }}
+        fullWidth
+        variant='outlined'
+        size='small'
+        label='Id'
       />
-      <Typography
-        variant='subtitle1'
-        sx={{
-          mx: 3,
-        }}
-      >
-        {" "}
+
+      <Typography variant='subtitle1' sx={{ mt: 2 }}>
         Seleccione un Manifiesto
       </Typography>
-      <Select
-        sx={{
-          backgroundColor: "#ffff",
-          color: "Black",
-          borderRadius: "24px",
-          m: 1,
 
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-          fontWeight: "bold",
-          fontSize: "20px",
-        }}
+      <Select
+        size='small'
+        sx={{ mt: 1, minWidth: "120px" }}
         labelId='demo-select-small'
         id='demo-select-small'
-        value={Manifiesto}
+        value={manifiesto}
         label='Manifiesto'
         onChange={handleChange}
       >
@@ -76,48 +46,16 @@ export default function FormContenedores() {
         <MenuItem value={"Manifiesto3"}>Manifiesto3</MenuItem>
       </Select>
 
-      <Container sx={{ display: "flex" }}>
+      <Container sx={{ display: "flex", justifyContent: "flex-end", mt: 3 }}>
         <Button
-          sx={{
-            backgroundColor: "#252525",
-            color: "white",
-            borderRadius: "10px",
-            m: 1,
-            px: 2,
-            border: 1,
-            borderColor: "#FF9B06",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            fontWeight: "bold",
-            fontSize: "12px",
-          }}
-          onClick={handleClose}
-          colorLetra={"#ffff"}
-          colorFondo={"#f44336"}
-          text={"Cancelar"}
+          variant='contained'
+          color='error'
+          sx={{ mr: 1 }}
+          onClick={() => {}}
         >
           Cancelar
         </Button>
-        <Button
-          sx={{
-            backgroundColor: "#A86500  ",
-            color: "white",
-            borderRadius: "10px",
-            m: 1,
-            px: 2,
-
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            fontWeight: "bold",
-            fontSize: "12px",
-          }}
-          onClick={handleClose}
-          colorLetra={"#ffff"}
-          colorFondo={"#A86500"}
-          text={"Asignar"}
-        >
+        <Button variant='contained' color='primary' onClick={() => {}}>
           Guardar
         </Button>
       </Container>

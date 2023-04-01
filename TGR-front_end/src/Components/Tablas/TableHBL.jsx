@@ -13,10 +13,6 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Container } from "@mui/material";
-import { Boton } from "./Boton";
-import ModalContenedores from "./ModalContenedores";
-import ModalFormContenedores from "./ModalFormContenedores";
 
 function createData(name, pagago, mail, telefono, direccion, price) {
   return {
@@ -238,10 +234,9 @@ const rows = [
   ),
 ];
 
-export default function TableContenedor() {
+export default function TableHBL() {
   return (
     <>
-      <ModalFormContenedores text={"Crear Contenedor"} />
       <TableContainer
         sx={{ backgroundColor: "#252525", borderColor: "#694D2C" }}
         component={Paper}

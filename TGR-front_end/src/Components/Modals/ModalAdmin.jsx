@@ -2,8 +2,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { Grid } from "@mui/material";
-import FormMultiStep from "./FormClienteMS";
-import { FMMensajero } from "./Formularios_MultiStep/FMMensajero";
+import { FMAdmin } from "../Formularios_MultiStep/FMAdmin";
 
 const style = {
   top: "50%",
@@ -18,7 +17,7 @@ const style = {
   color: "#ffff",
 };
 
-export default function ModalMensajero({ text }) {
+export default function ModalAdmin({ text }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -79,7 +78,7 @@ export default function ModalMensajero({ text }) {
               color: "#ffff",
             }}
           >
-            <FMMensajero />
+            <FMAdmin />
           </Grid>
         </Grid>
       </Modal>
