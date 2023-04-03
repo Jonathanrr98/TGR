@@ -18,7 +18,7 @@ const style = {
   color: "#ffff",
 };
 
-export const ModalEditarContenedores = () => {
+export const ModalEditarContenedores = ({ row }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -67,7 +67,7 @@ export const ModalEditarContenedores = () => {
               alignItems: "center",
             }}
           >
-            <FormularioEditarContenedores handleClose={handleClose} />
+            <FormularioEditarContenedores handleClose={handleClose} row={row} />
           </Grid>
         </Grid>
       </Modal>

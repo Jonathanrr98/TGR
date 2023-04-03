@@ -4,7 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { FMCliente } from "../Formularios_MultiStep/FMCliente";
 import { FormularioEditarCliente } from "../Formularios_MultiStep/FormularioEditarCliente";
 
-export const ModalEditarCliente = () => {
+export const ModalEditarCliente = ({ row }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -57,7 +57,7 @@ export const ModalEditarCliente = () => {
               color: "#ffff",
             }}
           >
-            <FormularioEditarCliente handleClose={handleClose} />
+            <FormularioEditarCliente handleClose={handleClose} row={row} />
           </Grid>
         </Grid>
       </Modal>

@@ -111,7 +111,7 @@ export const Administrador = () => {
         direction={"row-reverse"}
         container
         spacing={{ xs: 2, md: 3 }}
-        justifyContent='space-between'
+        justifyContent='scenter'
         alignItems='center'
       >
         <AppBar
@@ -261,11 +261,21 @@ export const Administrador = () => {
               mt: 2,
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
+              alignItems: "end",
             }}
           >
-            <Grid item container>
-              {<TableAdmin />}
+            <Grid
+              item
+              xs={12}
+              display='flex'
+              flexDirection='column'
+              sx={{
+                flexDirection: "column",
+                alignItems: "end",
+                width: "100%",
+              }}
+            >
+              <TableAdmin />
             </Grid>
           </Grid>
         </Grid>

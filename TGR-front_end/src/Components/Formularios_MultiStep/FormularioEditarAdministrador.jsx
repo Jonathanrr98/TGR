@@ -6,16 +6,16 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import { Grid, Input, Typography } from "@mui/material";
 
-export const FormularioEditarAdministrador = ({ handleClose }) => {
+export const FormularioEditarAdministrador = ({ handleClose, row }) => {
   const [formData, setFormData] = React.useState({
     /////// ****1/2****/////////////////
-    Correo: "",
-    Contrasena: "",
-    JWT: "",
+    Correo: row.Correo,
+    Contrasena: row.Contrasena,
+    JWT: row.JWT,
 
     ///////****2/2****//////////////////
-    RecuperarContrasena: "",
-    TipoPermiso: "",
+    RecuperarContrasena: row.RecuperarContrasena,
+    TipoPermiso: row.TipoPermiso,
   });
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -73,7 +73,7 @@ export const FormularioEditarAdministrador = ({ handleClose }) => {
                 name='Correo'
                 value={formData.Correo}
                 onChange={(e) =>
-                  setFormData({ ...formData, Nombre: e.target.value })
+                  setFormData({ ...formData, Correo: e.target.value })
                 }
               />
 
@@ -94,7 +94,7 @@ export const FormularioEditarAdministrador = ({ handleClose }) => {
                 name='Contrasena'
                 value={formData.Contrasena}
                 onChange={(e) =>
-                  setFormData({ ...formData, Contacto: e.target.value })
+                  setFormData({ ...formData, Contrasena: e.target.value })
                 }
               />
               <Input
@@ -114,7 +114,7 @@ export const FormularioEditarAdministrador = ({ handleClose }) => {
                 name='JWT'
                 value={formData.JWT}
                 onChange={(e) =>
-                  setFormData({ ...formData, Matricula: e.target.value })
+                  setFormData({ ...formData, JWT: e.target.value })
                 }
               />
             </Grid>
@@ -170,7 +170,10 @@ export const FormularioEditarAdministrador = ({ handleClose }) => {
                 name='RecuperarContrasena'
                 value={formData.RecuperarContrasena}
                 onChange={(e) =>
-                  setFormData({ ...formData, Direccion: e.target.value })
+                  setFormData({
+                    ...formData,
+                    RecuperarContrasena: e.target.value,
+                  })
                 }
               />
 
@@ -191,27 +194,7 @@ export const FormularioEditarAdministrador = ({ handleClose }) => {
                 name='TipoPermiso'
                 value={formData.TipoPermiso}
                 onChange={(e) =>
-                  setFormData({ ...formData, Provincia: e.target.value })
-                }
-              />
-              <Input
-                disableUnderline
-                placeholder='Municipio'
-                sx={{
-                  display: "flex",
-                  px: 2,
-                  mx: 5,
-                  my: 2,
-                  border: 1,
-                  borderRadius: 32,
-                  borderColor: "#fff",
-                  color: "#ffff",
-                }}
-                label='Municipio'
-                name='Municipio'
-                value={formData.Municipio}
-                onChange={(e) =>
-                  setFormData({ ...formData, Municipio: e.target.value })
+                  setFormData({ ...formData, TipoPermiso: e.target.value })
                 }
               />
             </Grid>

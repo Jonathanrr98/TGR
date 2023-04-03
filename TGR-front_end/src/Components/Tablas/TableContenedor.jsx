@@ -97,7 +97,7 @@ function Row({ row, eliminarPorId }) {
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          <ModalEditarContenedores />
+          <ModalEditarContenedores row={row} />
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
@@ -207,7 +207,7 @@ function Row({ row, eliminarPorId }) {
 export default function TableContenedor() {
   const [rows, setRows] = useState([
     createData(
-      "#",
+      60,
       " 550",
       " 220",
       "Rumbo habana-Dominicana_Florida",
@@ -215,7 +215,7 @@ export default function TableContenedor() {
       1
     ),
     createData(
-      "#",
+      45,
       " 550",
       " 220",
       "Rumbo habana-Dominicana_Florida",
@@ -223,7 +223,7 @@ export default function TableContenedor() {
       2
     ),
     createData(
-      "#",
+      33,
       " 550",
       " 220",
       "Rumbo habana-Dominicana_Florida",

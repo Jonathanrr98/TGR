@@ -21,21 +21,21 @@ const style = {
   color: "#ffff",
 };
 
-export default function ModalEditarMensajero() {
+export default function ModalEditarMensajero({ row }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const [formData, setFormData] = React.useState({
     /////// ****1/2****/////////////////
-    Nombre: "",
-    Contacto: "",
-    Matricula: "",
+    Nombre: row.Nombre,
+    CantidadEnvios: row.CantidadEnvios,
+    Matricula: row.Matricula,
 
     ///////****2/2****//////////////////
-    Direccion: "",
-    Provincia: "",
-    Municipio: "",
+    Provincia: row.Provincia,
+    Telefono: row.Telefono,
+    Movil: row.Movil,
   });
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -89,7 +89,7 @@ export default function ModalEditarMensajero() {
 
               <Input
                 disableUnderline
-                placeholder='Contacto'
+                placeholder='Cantid de Envios'
                 sx={{
                   display: "flex",
                   px: 2,
@@ -100,11 +100,11 @@ export default function ModalEditarMensajero() {
                   borderColor: "#fff",
                   color: "#ffff",
                 }}
-                label='Contacto'
-                name='Contacto'
-                value={formData.Contacto}
+                label='CantidadEnvios'
+                name='CantidadEnvios'
+                value={formData.CantidadEnvios}
                 onChange={(e) =>
-                  setFormData({ ...formData, Contacto: e.target.value })
+                  setFormData({ ...formData, CantidadEnvios: e.target.value })
                 }
               />
               <Input
@@ -166,27 +166,6 @@ export default function ModalEditarMensajero() {
             <Grid item xs={16}>
               <Input
                 disableUnderline
-                placeholder='Dirección'
-                sx={{
-                  display: "flex",
-                  px: 2,
-                  mx: 5,
-                  mt: 3,
-                  border: 1,
-                  borderRadius: 32,
-                  borderColor: "#fff",
-                  color: "#ffff",
-                }}
-                label='Direccion'
-                name='Direccion'
-                value={formData.Direccion}
-                onChange={(e) =>
-                  setFormData({ ...formData, Direccion: e.target.value })
-                }
-              />
-
-              <Input
-                disableUnderline
                 placeholder='Provincia'
                 sx={{
                   display: "flex",
@@ -205,9 +184,10 @@ export default function ModalEditarMensajero() {
                   setFormData({ ...formData, Provincia: e.target.value })
                 }
               />
+
               <Input
                 disableUnderline
-                placeholder='Municipio'
+                placeholder='Teléfono'
                 sx={{
                   display: "flex",
                   px: 2,
@@ -218,11 +198,31 @@ export default function ModalEditarMensajero() {
                   borderColor: "#fff",
                   color: "#ffff",
                 }}
-                label='Municipio'
-                name='Municipio'
-                value={formData.Municipio}
+                label='Telefono'
+                name='Telefono'
+                value={formData.Telefono}
                 onChange={(e) =>
-                  setFormData({ ...formData, Municipio: e.target.value })
+                  setFormData({ ...formData, Telefono: e.target.value })
+                }
+              />
+              <Input
+                disableUnderline
+                placeholder='Móvil'
+                sx={{
+                  display: "flex",
+                  px: 2,
+                  mx: 5,
+                  my: 2,
+                  border: 1,
+                  borderRadius: 32,
+                  borderColor: "#fff",
+                  color: "#ffff",
+                }}
+                label='Movil'
+                name='Movil'
+                value={formData.Movil}
+                onChange={(e) =>
+                  setFormData({ ...formData, Movil: e.target.value })
                 }
               />
             </Grid>

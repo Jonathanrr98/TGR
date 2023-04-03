@@ -6,7 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Container, Grid } from "@mui/material";
+import Paper from "@mui/material/Paper";
 import ModalAdmin from "../Modals/ModalAdmin";
 import { ModalEditarAdmin } from "../Modals/ModalEditarAdmin";
 import ModalEliminarAdministrador from "../Modals/ModalEliminarAdministrador";
@@ -82,7 +82,7 @@ function Row({ row, eliminarPorId }) {
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          <ModalEditarAdmin />
+          <ModalEditarAdmin row={row} />
         </TableCell>
 
         <TableCell
@@ -131,75 +131,66 @@ export default function TableAdmin() {
 
   return (
     <>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Container>
-            <ModalAdmin />
-            <TableContainer
-              sx={{ backgroundColor: "#252525", borderColor: "#694D2C" }}
-            >
-              <Table
-                sx={{ borderColor: "#694D2C" }}
-                ariaLabel='collapsible table'
+      <ModalAdmin />
+      <TableContainer
+        sx={{
+          backgroundColor: "#252525",
+          borderColor: "#694D2C",
+        }}
+        component={Paper}
+      >
+        <Table sx={{ borderColor: "#694D2C" }} ariaLabel='collapsible table'>
+          <TableHead sx={{ background: "#0F0F0F" }}>
+            <TableRow sx={{ borderColor: "#694D2C" }}>
+              <TableCell sx={{ borderColor: "#694D2C" }} />
+              <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
+                Correo
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
               >
-                <TableHead sx={{ background: "#0F0F0F" }}>
-                  <TableRow sx={{ borderColor: "#694D2C" }}>
-                    <TableCell sx={{ borderColor: "#694D2C" }} />
-                    <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
-                      Correo
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "#694D2C", color: "white" }}
-                      align='center'
-                    >
-                      Contraseña
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "#694D2C", color: "white" }}
-                      align='center'
-                    >
-                      JWT
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "#694D2C", color: "white" }}
-                      align='center'
-                    >
-                      Tipo de Permiso
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "#694D2C", color: "white" }}
-                      align='center'
-                    >
-                      Recuperar Contraseña
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "#694D2C", color: "white" }}
-                      align='center'
-                    >
-                      Editar
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderColor: "#694D2C", color: "white" }}
-                      align='center'
-                    >
-                      Eliminar
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody sx={{ borderColor: "#694D2C", color: "white" }}>
-                  {rows.map((row) => (
-                    <Row
-                      key={row.Correo}
-                      row={row}
-                      eliminarPorId={eliminarPorId}
-                    />
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Container>
-        </Grid>
-      </Grid>
+                Contraseña
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                JWT
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Tipo de Permiso
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Recuperar Contraseña
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Editar
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Eliminar
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody sx={{ borderColor: "#694D2C", color: "white" }}>
+            {rows.map((row) => (
+              <Row key={row.Correo} row={row} eliminarPorId={eliminarPorId} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>
   );
 }

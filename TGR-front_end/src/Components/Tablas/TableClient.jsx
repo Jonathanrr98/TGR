@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -19,29 +18,71 @@ import ModalEliminarCliente from "../Modals/ModalEliminarCliente";
 import { ModalEditarCliente } from "../Modals/ModalEditarCliente";
 import { useState } from "react";
 
-function createData(name, pagago, mail, telefono, direccion, id) {
+function createData(
+  name,
+  Apellido,
+  pagado,
+  Email,
+  telefono,
+  direccion,
+  Ciudad,
+  Estado,
+
+  id
+) {
   return {
     name,
-    pagago,
+    Apellido,
+    pagado,
+    Email,
     telefono,
-    mail,
     direccion,
+    Ciudad,
+    Estado,
+
     id,
 
-    cliente1: [
+    Mercancia: [
       {
-        historial: "cortina",
-        peso: "1",
-        contenedor: "k8234kl",
         HBL: "30804548255",
+        historial: "cortina",
+        Bultos: 56,
+        Peso: "100",
+        Descripcion: "Descripción mercancía",
+        Estado: "En Cuba",
+        Dueno: "Pepe",
+        contenedor: "k8234kl",
+        Volumen: "15m*",
+        Destinatario: "juan",
+
         Pago: true,
       },
+    ],
+
+    DatosRemitente: [
       {
-        historial: "mesa",
-        peso: "3",
-        contenedor: "k2345kl",
-        HBL: "20804548255",
-        pago: false,
+        Info: "Remitente",
+        Nombre: "Datos de Remitente",
+        Apellido: "perez",
+        Estado: "Ramon Perez",
+        Ciudad: "emailejemplo3",
+        Direccion: "57678965",
+        Email: "La Habana",
+        Telefono: "57678965",
+      },
+    ],
+
+    DatosDestinatario: [
+      {
+        Info: "Destinatario",
+        Nombre: "Pedro Perez",
+        Direccion: "Calle 8",
+        Provincia: "La Habana",
+        Municipio: "Plaza",
+        Telefono: "57678965",
+        DNIPasaporte: "L2156",
+        CarnetIdentidad: "940786724",
+        Email: "correo@ejemplo.com",
       },
     ],
   };
@@ -72,36 +113,57 @@ function Row({ row, eliminarPorId }) {
         >
           {row.name}
         </TableCell>
+
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          {row.pagago}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.mail}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='right'
-        >
-          {row.telefono}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.direccion}
+          {row.Apellido}
         </TableCell>
 
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          <ModalEditarCliente />
+          {row.pagado}
+        </TableCell>
+
+        <TableCell
+          sx={{ color: "white", borderColor: "#694D2C" }}
+          align='center'
+        >
+          {row.Email}
+        </TableCell>
+        <TableCell
+          sx={{ color: "white", borderColor: "#694D2C" }}
+          align='center'
+        >
+          {row.telefono}
+        </TableCell>
+        <TableCell
+          sx={{ color: "white", borderColor: "#694D2C" }}
+          align='right'
+        >
+          {row.direccion}
+        </TableCell>
+        <TableCell
+          sx={{ color: "white", borderColor: "#694D2C" }}
+          align='center'
+        >
+          {row.Ciudad}
+        </TableCell>
+        <TableCell
+          sx={{ color: "white", borderColor: "#694D2C" }}
+          align='center'
+        >
+          {row.Estado}
+        </TableCell>
+
+        <TableCell
+          sx={{ color: "white", borderColor: "#694D2C" }}
+          align='center'
+        >
+          <ModalEditarCliente row={row} />
         </TableCell>
 
         <TableCell
@@ -135,7 +197,7 @@ function Row({ row, eliminarPorId }) {
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
                     <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      Historial Producto Enviado
+                      Descripción de Producto
                     </TableCell>
                     <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
                       Peso (KG)
@@ -156,12 +218,19 @@ function Row({ row, eliminarPorId }) {
                       sx={{ color: "white", borderColor: "#694D2C" }}
                       align='center'
                     >
+                      Volumen
+                    </TableCell>
+
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
                       Pago
                     </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.cliente1.map((historyRow) => (
+                  {row.Mercancia.map((historyRow) => (
                     <TableRow key={historyRow.dni_pasaporte}>
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
@@ -191,6 +260,13 @@ function Row({ row, eliminarPorId }) {
                         sx={{ color: "white", borderColor: "#694D2C" }}
                         align='center'
                       >
+                        {historyRow.Volumen}
+                      </TableCell>
+
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
                         {historyRow.pago === false ? (
                           <Typography
                             //disable pointer hober
@@ -213,6 +289,131 @@ function Row({ row, eliminarPorId }) {
               </Table>
             </Box>
           </Collapse>
+
+          <Collapse in={open} timeout='auto' unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              <Typography
+                color={"white"}
+                variant='h6'
+                gutterBottom
+                component='div'
+              >
+                {/* History */}
+              </Typography>
+              <Table size='small' aria-label='purchases'>
+                <TableHead>
+                  <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
+                    <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
+                      Destinatario:
+                    </TableCell>
+                    <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
+                      Nombre
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Dirección
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Provincia
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Municipio
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Telefono
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      DNI / Pasaporte
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Carnet de Identidad
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Email
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {row.DatosDestinatario.map((historyRow) => (
+                    <TableRow key={historyRow.dni_pasaporte}>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        component='th'
+                        scope='row'
+                      ></TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                      >
+                        {historyRow.Nombre}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {historyRow.Direccion}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {historyRow.Provincia}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {historyRow.Municipio}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {historyRow.Telefono}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {historyRow.DNIPasaporte}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {historyRow.CarnetIdentidad}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {historyRow.Email}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
         </TableCell>
       </TableRow>
     </React.Fragment>
@@ -222,29 +423,15 @@ function Row({ row, eliminarPorId }) {
 export default function TableClient() {
   const [rows, setRows] = useState([
     createData(
-      "Juan Perez",
-      " 50/100",
+      "Juan",
+      " Perez",
+      " si",
       " mail@asd.com",
       "+" + 18983589139,
       "98, Ave 3ra e/ 4ta Miami Fl",
+      "La Habana",
+      "En Cuba",
       1
-    ),
-    createData(
-      "Juan Perez",
-      " 50/100",
-      " mail@asd.com",
-      "+" + 18983589139,
-      "98, Ave 3ra e/ 4ta Miami Fl",
-      2
-    ),
-
-    createData(
-      "Juan Perez",
-      " 50/100",
-      " mail@asd.com",
-      "+" + 18983589139,
-      "98, Ave 3ra e/ 4ta Miami Fl",
-      3
     ),
   ]);
 
@@ -265,31 +452,49 @@ export default function TableClient() {
             <TableRow sx={{ borderColor: "#694D2C" }}>
               <TableCell sx={{ borderColor: "#694D2C" }} />
               <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
-                Nombre y Apellido
+                Nombre
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Apellido
               </TableCell>
               <TableCell
                 style={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
-                PAGAGO
+                Pagado
               </TableCell>
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
-                Mail
+                Email
               </TableCell>
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
-                Número
+                Teléfono
               </TableCell>
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
                 Dirección
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Ciudad
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Estado
               </TableCell>
 
               <TableCell

@@ -256,9 +256,9 @@ export const Cliente = () => {
           <DrawerHeader />
           <Grid
             container
-            spacing={2}
+            spacing={1}
             sx={{
-              width: "90%",
+              width: "95%",
               mt: 2,
               display: "flex",
               flexDirection: "column",

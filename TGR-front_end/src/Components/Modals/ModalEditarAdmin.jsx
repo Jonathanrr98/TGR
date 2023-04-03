@@ -4,7 +4,7 @@ import { FMAdmin } from "../Formularios_MultiStep/FMAdmin";
 import EditIcon from "@mui/icons-material/Edit";
 import { FormularioEditarAdministrador } from "../Formularios_MultiStep/FormularioEditarAdministrador";
 
-export const ModalEditarAdmin = () => {
+export const ModalEditarAdmin = ({ row }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -57,7 +57,10 @@ export const ModalEditarAdmin = () => {
               color: "#ffff",
             }}
           >
-            <FormularioEditarAdministrador handleClose={handleClose} />
+            <FormularioEditarAdministrador
+              row={row}
+              handleClose={handleClose}
+            />
           </Grid>
         </Grid>
       </Modal>

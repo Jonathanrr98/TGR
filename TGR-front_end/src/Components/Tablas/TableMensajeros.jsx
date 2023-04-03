@@ -94,7 +94,7 @@ function Row({ row, eliminarPorId }) {
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          <ModalEditarMensajero />
+          <ModalEditarMensajero row={row} />
         </TableCell>
 
         <TableCell

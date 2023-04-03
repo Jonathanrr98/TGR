@@ -2,14 +2,22 @@ import React from "react";
 import { Button, Input, MenuItem, Select, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 
-export const FormularioEditarContenedores = ({ handleClose }) => {
+export const FormularioEditarContenedores = ({ handleClose, row }) => {
   const [Manifiesto, setManifiesto] = React.useState("");
-  const handleChange = (event) => {
-    setManifiesto(event.target.value);
-  };
 
   const cerrarModal = () => handleClose();
 
+  const [formData, setFormData] = React.useState({
+    Contenedor: row.Contenedor,
+    id: row.id,
+    Manifiesto: row.manifiesto,
+  });
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
   return (
     <>
       <Typography
@@ -25,6 +33,8 @@ export const FormularioEditarContenedores = ({ handleClose }) => {
       </Typography>
 
       <Input
+        disableUnderline
+        placeholder='Id'
         sx={{
           px: 2,
           mx: 8,
@@ -34,8 +44,9 @@ export const FormularioEditarContenedores = ({ handleClose }) => {
           borderColor: "#fff",
           color: "#ffff",
         }}
-        disableUnderline
-        placeholder='Id'
+        label='id'
+        value={formData.Contenedor}
+        onChange={handleChange}
       />
       <Typography
         variant='subtitle1'
@@ -63,8 +74,8 @@ export const FormularioEditarContenedores = ({ handleClose }) => {
         }}
         labelId='demo-select-small'
         id='demo-select-small'
-        value={Manifiesto}
         label='Manifiesto'
+        value={formData.Manifiesto}
         onChange={handleChange}
       >
         <MenuItem value=''>

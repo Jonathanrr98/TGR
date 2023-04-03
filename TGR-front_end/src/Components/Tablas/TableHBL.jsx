@@ -14,29 +14,50 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useState } from "react";
-import { ModalEliminarHBL } from "../Modals/ModalEliminarHBL";
 
-function createData(name, pagago, mail, telefono, direccion, id) {
+function createData(
+  Bultos,
+  Peso,
+  Descripcion,
+  Estado,
+  Dueno,
+  Destinatario,
+  id
+) {
   return {
-    name,
-    pagago,
-    telefono,
-    mail,
-    direccion,
+    Bultos,
+    Peso,
+    Descripcion,
+    Estado,
+    Dueno,
+    Destinatario,
     id,
 
-    history: [
+    DatosRemitente: [
       {
-        dni_pasaporte: "L3782",
-        provincia: "La Habana",
-        municipio: "Playa",
-        ci: "957678965",
+        Info: "Remitente",
+        Nombre: "Pedro",
+        Apellido: "Ramos",
+        Estado: "Estado 1",
+        Ciudad: "Miami",
+        Direccion: "Calle 8, FL",
+        Email: "correoremitente@gmail.com",
+        Telefono: "57678965",
+        Pagado: false,
       },
+    ],
+
+    DatosDestinatario: [
       {
-        dni_pasaporte: "F7654",
-        provincia: "Granma",
-        municipio: "Bayamo",
-        ci: "875654890",
+        Info: "Destinatario",
+        Nombre: "Juan",
+        Direccion: "Linea y Malecon",
+        Provincia: "La Habana",
+        Municipio: "Plaza",
+        Telefono: "57678965",
+        DNIPasaporte: "L2345",
+        CarnetIdentidad: "9293765384",
+        Correo: "correodestinatario@gmail.com",
       },
     ],
   };
@@ -65,43 +86,37 @@ function Row({ row, eliminarPorId }) {
           component='th'
           scope='row'
         >
-          {row.name}
+          {row.Bultos}
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          {row.pagago}
+          {row.Peso}
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          {row.mail}
+          {row.Descripcion}
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='right'
         >
-          {row.telefono}
+          {row.Estado}
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          {row.direccion}
+          {row.Dueno}
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
-          Editar
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          <ModalEliminarHBL />
+          {row.Destinatario}
         </TableCell>
       </TableRow>
       <TableRow>
@@ -128,10 +143,10 @@ function Row({ row, eliminarPorId }) {
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
                     <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      DNI / Pasaporte
+                      Información
                     </TableCell>
                     <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      Provincia
+                      Nombre
                     </TableCell>
                     <TableCell
                       sx={{ color: "white", borderColor: "#694D2C" }}
@@ -143,36 +158,181 @@ function Row({ row, eliminarPorId }) {
                       sx={{ color: "white", borderColor: "#694D2C" }}
                       align='center'
                     >
-                      No. deCarnet de Identidad
+                      Teléfono
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      DNI / Pasaporte
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Carnet de Identidad
                     </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.dni_pasaporte}>
+                  {row.DatosDestinatario.map((Destinatario) => (
+                    <TableRow key={Destinatario.Email}>
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
                         component='th'
                         scope='row'
                       >
-                        {historyRow.dni_pasaporte}
+                        {Destinatario.Info}
                       </TableCell>
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
                       >
-                        {historyRow.provincia}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {historyRow.municipio}
+                        {Destinatario.Nombre}
                       </TableCell>
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
                         align='center'
                       >
-                        {historyRow.ci}
+                        {Destinatario.Municipio}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {Destinatario.Telefono}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {Destinatario.DNIPasaporte}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {Destinatario.CarnetIdentidad}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {Destinatario.Email}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
+
+          <Collapse in={open} timeout='auto' unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              <Typography
+                color={"white"}
+                variant='h6'
+                gutterBottom
+                component='div'
+              >
+                {/* History */}
+              </Typography>
+              <Table size='small' aria-label='purchases'>
+                <TableHead>
+                  <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
+                    <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
+                      Información
+                    </TableCell>
+                    <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
+                      Nombre
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Apellido
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Estado
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Ciudad
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Dirección
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Email
+                    </TableCell>
+                    <TableCell
+                      sx={{ color: "white", borderColor: "#694D2C" }}
+                      align='center'
+                    >
+                      Teléfono
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {row.DatosRemitente.map((Destinatario) => (
+                    <TableRow key={Destinatario.Email}>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        component='th'
+                        scope='row'
+                      >
+                        {Destinatario.Info}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                      >
+                        {Destinatario.Nombre}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {Destinatario.Apellido}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {Destinatario.Estado}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {Destinatario.Ciudad}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {Destinatario.Direccion}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {Destinatario.Email}
+                      </TableCell>
+                      <TableCell
+                        sx={{ color: "white", borderColor: "#694D2C" }}
+                        align='center'
+                      >
+                        {Destinatario.Telefono}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -189,28 +349,22 @@ function Row({ row, eliminarPorId }) {
 export default function TableHBL() {
   const [rows, setRows] = useState([
     createData(
-      "Frank Perez",
-      " 50/100",
-      " mail3@asd.com",
-      "+" + 5358419139,
-      "8, Ave 3ra e/ 4ta Miami Fl",
+      "30",
+      " 80",
+      " Descripción de la mercancía",
+      "Estado",
+      "Dueño",
+      "Destinatario 1",
       1
     ),
     createData(
-      "Jose Perez",
-      " 50/100",
-      " mail4@asd.com",
-      "+" + 5358736139,
-      "358, Ave 3ra e/ 4ta Miami Fl",
-      2
-    ),
-    createData(
-      "Luis Perez",
-      " 50/100",
-      " mail5@asd.com",
-      "+" + 53584149932,
-      "28, Ave 3ra e/ 4ta Miami Fl",
-      3
+      "10",
+      " 20",
+      " Descripción de la mercancía 2",
+      "Estado",
+      "Dueño 2",
+      "Destinatario 2",
+      1
     ),
   ]);
 
@@ -230,43 +384,37 @@ export default function TableHBL() {
             <TableRow sx={{ borderColor: "#694D2C" }}>
               <TableCell sx={{ borderColor: "#694D2C" }} />
               <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
-                Nombre y Apellido
+                Bultos
               </TableCell>
               <TableCell
                 style={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
-                PAGAGO
+                Peso (Kg)
               </TableCell>
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
-                Mail
+                Descripción
               </TableCell>
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
-                Número
+                Estado
               </TableCell>
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
-                Dirección
+                Dueño
               </TableCell>
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
               >
-                Editar
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Eliminar
+                Destinatario
               </TableCell>
             </TableRow>
           </TableHead>

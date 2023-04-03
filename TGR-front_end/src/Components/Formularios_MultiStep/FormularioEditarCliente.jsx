@@ -6,33 +6,34 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import { Grid, Input, Typography } from "@mui/material";
 
-export const FormularioEditarCliente = ({ handleClose }) => {
+export const FormularioEditarCliente = ({ handleClose, row }) => {
   const [formData, setFormData] = React.useState({
     ///////Remitente//////////////////
-    Nombre: "",
-    Apellidos: "",
-    EstadoR: "",
-    Ciudad: "",
-    DireccionR: "",
-    EmailR: "",
-    TelefonoR: "",
+    Nombre: row.name,
+    Apellidos: row.Apellido,
+    EstadoR: row.Estado,
+    Ciudad: row.Ciudad,
+    DireccionR: row.direccion,
+    EmailR: row.Email,
+    TelefonoR: row.telefono,
     ///////DESTINATARIO//////////////////
-    NombreYApellido: "",
-    Direccion: "",
-    Provincia: "",
-    Municipio: "",
-    Telefono: "",
-    DNIPasaporte: "",
-    CarnetDeIdentidad: "",
-    Email: "",
+
+    NombreYApellido: row.DatosDestinatario[0].Nombre,
+    Direccion: row.DatosDestinatario[0].Direccion,
+    Provincia: row.DatosDestinatario[0].Provincia,
+    Municipio: row.DatosDestinatario[0].Municipio,
+    Telefono: row.DatosDestinatario[0].Telefono,
+    DNIPasaporte: row.DatosDestinatario[0].DNIPasaporte,
+    CarnetDeIdentidad: row.DatosDestinatario[0].CarnetDeIdentidad,
+    Email: row.DatosDestinatario[0].Email,
     /////////MERCANCIA////////////////
-    HBL: "",
-    Bultos: "",
-    Peso: "",
-    Descripcion: "",
-    Estado: "",
-    Dueno: "",
-    Destinatario: "",
+    HBL: row.Mercancia[0].HBL,
+    Bultos: row.Mercancia[0].Bultos,
+    Peso: row.Mercancia[0].Peso,
+    Descripcion: row.Mercancia[0].Descripcion,
+    Estado: row.Mercancia[0].Estado,
+    Dueno: row.Mercancia[0].Dueno,
+    Destinatario: row.Mercancia[0].Destinatario,
   });
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -110,7 +111,7 @@ export const FormularioEditarCliente = ({ handleClose }) => {
                 }}
                 label='Apellido'
                 name='Apellido'
-                value={formData.Apellido}
+                value={formData.Apellidos}
                 onChange={handleChange}
               />
               <Input
