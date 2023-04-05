@@ -13,6 +13,7 @@ export default function ModalAdmin() {
     <>
       <Grid
         sx={{
+          display: "flex",
           justifyContent: "flex-end",
           alignItems: "center",
         }}
@@ -27,6 +28,7 @@ export default function ModalAdmin() {
             alignItems: "center",
             fontWeight: "bold",
             fontSize: "12px",
+            justifyContent: "flex-end",
           }}
           onClick={handleOpen}
         >

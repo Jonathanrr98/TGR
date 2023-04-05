@@ -73,7 +73,7 @@ export default function ModalFormContenedores({ text }) {
               alignItems: "center",
             }}
           >
-            <FormularioContenedores />
+            <FormularioContenedores handleClose={handleClose} />
           </Grid>
         </Grid>
       </Modal>

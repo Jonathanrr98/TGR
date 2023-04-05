@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { Grid, Modal } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { FormularioContenedores } from "../Formularios_MultiStep/FormmularioContenedores";
+
 import { FormularioEditarContenedores } from "../Formularios_MultiStep/FormularioEditarContenedores";
 
 const style = {
@@ -21,6 +21,7 @@ const style = {
 export const ModalEditarContenedores = ({ row }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
+  console.log(row);
   const handleClose = () => setOpen(false);
 
   return (

@@ -23,7 +23,8 @@ function createData(
   Peso,
   EstadoGeneral,
   Numero,
-  id
+  id,
+  Manifiesto
 ) {
   return {
     Contenedor,
@@ -32,6 +33,7 @@ function createData(
     EstadoGeneral,
     Numero,
     id,
+    Manifiesto,
 
     history: [
       {
@@ -92,6 +94,12 @@ function Row({ row, eliminarPorId }) {
           align='center'
         >
           {row.Numero}
+        </TableCell>
+        <TableCell
+          sx={{ color: "white", borderColor: "#694D2C" }}
+          align='center'
+        >
+          {row.Manifiesto}
         </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
@@ -211,24 +219,27 @@ export default function TableContenedor() {
       " 550",
       " 220",
       "Rumbo habana-Dominicana_Florida",
-      "+52836826",
-      1
+      "24120",
+      2,
+      "Manifiesto2"
     ),
     createData(
       45,
       " 550",
       " 220",
       "Rumbo habana-Dominicana_Florida",
-      "+52836826",
-      2
+      "2464",
+      2,
+      "Manifiesto1"
     ),
     createData(
       33,
       " 550",
       " 220",
       "Rumbo habana-Dominicana_Florida",
-      "+52836826",
-      3
+      "2415",
+      5,
+      "Manifiesto5"
     ),
   ]);
 
@@ -274,6 +285,12 @@ export default function TableContenedor() {
                 align='center'
               >
                 Número
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Manifiesto
               </TableCell>
 
               <TableCell

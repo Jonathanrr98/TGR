@@ -2,15 +2,18 @@ import React from "react";
 import { Button, Input, MenuItem, Select, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 
-export const FormularioEditarContenedores = ({ handleClose, row }) => {
-  const [Manifiesto, setManifiesto] = React.useState("");
-
+export const FormularioEditarContenedores = ({
+  handleClose,
+  row,
+  listaManifiesto,
+}) => {
+  console.log(listaManifiesto);
   const cerrarModal = () => handleClose();
 
   const [formData, setFormData] = React.useState({
     Contenedor: row.Contenedor,
     id: row.id,
-    Manifiesto: row.manifiesto,
+    Manifiesto: row.Manifiesto,
   });
   const handleChange = (event) => {
     setFormData({
@@ -18,6 +21,7 @@ export const FormularioEditarContenedores = ({ handleClose, row }) => {
       [event.target.name]: event.target.value,
     });
   };
+
   return (
     <>
       <Typography
@@ -79,11 +83,12 @@ export const FormularioEditarContenedores = ({ handleClose, row }) => {
         onChange={handleChange}
       >
         <MenuItem value=''>
-          <em>None</em>
+          {/* {listaManifiesto.map(({ Manifiesto }, index) => (
+            <li key={index}>{Manifiesto}</li>
+          ))} */}
         </MenuItem>
-        <MenuItem value={"Manifiesto1"}>Manifiesto1</MenuItem>
-        <MenuItem value={"Manifiesto2"}>Manifiesto2</MenuItem>
-        <MenuItem value={"Manifiesto3"}>Manifiesto3</MenuItem>
+
+        <MenuItem value={row.Manifiesto}>{row.Manifiesto}</MenuItem>
       </Select>
 
       <Container sx={{ display: "flex", justifyContent: "center" }}>

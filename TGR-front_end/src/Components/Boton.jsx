@@ -33,3 +33,5 @@ export const Boton = ({ text, colorFondo, colorLetra }) => {
     </>
   );
 };
+
+export default Boton;

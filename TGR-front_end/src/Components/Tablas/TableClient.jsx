@@ -181,18 +181,10 @@ function Row({ row, eliminarPorId }) {
             paddingTop: 0,
             color: "white",
           }}
-          colSpan={6}
+          colSpan={12}
         >
           <Collapse in={open} timeout='auto' unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography
-                color={"white"}
-                variant='h6'
-                gutterBottom
-                component='div'
-              >
-                {/* History */}
-              </Typography>
               <Table size='small' aria-label='purchases'>
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
@@ -242,7 +234,7 @@ function Row({ row, eliminarPorId }) {
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
                       >
-                        {historyRow.peso}
+                        {historyRow.Peso}
                       </TableCell>
                       <TableCell
                         sx={{ color: "white", borderColor: "#694D2C" }}
@@ -269,8 +261,6 @@ function Row({ row, eliminarPorId }) {
                       >
                         {historyRow.pago === false ? (
                           <Typography
-                            //disable pointer hober
-
                             disableElevation
                             sx={{
                               height: 20,
@@ -291,15 +281,7 @@ function Row({ row, eliminarPorId }) {
           </Collapse>
 
           <Collapse in={open} timeout='auto' unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography
-                color={"white"}
-                variant='h6'
-                gutterBottom
-                component='div'
-              >
-                {/* History */}
-              </Typography>
+            <Box sx={{ margin: 2 }}>
               <Table size='small' aria-label='purchases'>
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
@@ -444,7 +426,10 @@ export default function TableClient() {
       <ModalCliente text={"Crear Cliente"} />
 
       <TableContainer
-        sx={{ backgroundColor: "#252525", borderColor: "#694D2C" }}
+        sx={{
+          backgroundColor: "#252525",
+          borderColor: "#694D2C",
+        }}
         component={Paper}
       >
         <Table sx={{ borderColor: "#694D2C" }} aria-label='collapsible table'>

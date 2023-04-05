@@ -92,7 +92,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const Layout = ({ children }) => {
+const Layout2 = ({ children }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -156,7 +156,6 @@ const Layout = ({ children }) => {
 
           <List sx={{ backgroundColor: "#252525", color: "#ffff" }}>
             {[
-              "Clientes",
               "Mensajeros",
               "Administradores",
               "HBL",
@@ -178,18 +177,16 @@ const Layout = ({ children }) => {
               >
                 <Link
                   to={
-                    text === "Clientes"
-                      ? "/cliente"
-                      : text === "Mensajeros"
-                      ? "/mensajero"
+                    text === "Mensajeros"
+                      ? "/mensajero2"
                       : text === "Administradores"
-                      ? "/administrador"
+                      ? "/admin2"
                       : text === "HBL"
-                      ? "/hbl"
+                      ? "/hbl2"
                       : text === "Manifiesto"
-                      ? "/manifiesto"
+                      ? "/manifiesto2"
                       : text === "Contenedores"
-                      ? "/contenedores"
+                      ? "/contenedores2"
                       : "/"
                   }
                   style={{ textDecoration: "none", color: "#ffff" }}
@@ -210,9 +207,7 @@ const Layout = ({ children }) => {
                         justifyContent: "center",
                       }}
                     >
-                      {text === "Clientes" ? (
-                        <img src={IconClient} />
-                      ) : text === "Manifiesto" ? (
+                      {text === "Manifiesto" ? (
                         <img src={IconManifiesto} />
                       ) : text === "HBL" ? (
                         <img src={IconHBL} />
@@ -269,4 +264,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default Layout2;

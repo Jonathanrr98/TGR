@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";

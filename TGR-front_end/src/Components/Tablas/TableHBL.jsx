@@ -127,18 +127,10 @@ function Row({ row, eliminarPorId }) {
             paddingTop: 0,
             color: "white",
           }}
-          colSpan={6}
+          colSpan={12}
         >
           <Collapse in={open} timeout='auto' unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography
-                color={"white"}
-                variant='h6'
-                gutterBottom
-                component='div'
-              >
-                {/* History */}
-              </Typography>
               <Table size='small' aria-label='purchases'>
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
@@ -227,15 +219,7 @@ function Row({ row, eliminarPorId }) {
           </Collapse>
 
           <Collapse in={open} timeout='auto' unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-              <Typography
-                color={"white"}
-                variant='h6'
-                gutterBottom
-                component='div'
-              >
-                {/* History */}
-              </Typography>
+            <Box sx={{ margin: 3 }}>
               <Table size='small' aria-label='purchases'>
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
