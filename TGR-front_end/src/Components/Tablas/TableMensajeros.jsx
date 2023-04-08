@@ -13,6 +13,9 @@ import ModalMensajero from "../Modals/ModalMensajero";
 import ModalEliminarMensajero from "../Modals/ModalEliminarMensajero";
 import ModalEditarMensajero from "../Modals/ModalEditarMensajero";
 import { useState } from "react";
+import { columnNamesMensajero } from "../../Data/ColumnNames";
+
+import { arrayOfKeysNamesInOrderMensajero } from "../../Data/RowOrganizers";
 
 function createData(
   Nombre,
@@ -34,25 +37,7 @@ function createData(
   };
 }
 
-const arrayOfKeysNamesInOrder = [
-  "Nombre",
-  "CantidadEnvios",
-  "Matricula",
-  "Provincia",
-  "Telefono",
-  "Movil",
-];
-
-const columnNames = [
-  "Nombre",
-  "Cantidad de Envios",
-  "Matrícula",
-  "Provincia",
-  "Teléfono",
-  "Móvil",
-];
-
-function Row({ row, eliminarPorId, arrayOfKeysNamesInOrder }) {
+function Row({ row, eliminarPorId }) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -60,7 +45,7 @@ function Row({ row, eliminarPorId, arrayOfKeysNamesInOrder }) {
       <TableRow
         sx={{ "& > *": { borderBottom: "unset", borderColor: "#694D2C" } }}
       >
-        {arrayOfKeysNamesInOrder.map((keyNameForOrder) => (
+        {arrayOfKeysNamesInOrderMensajero.map((keyNameForOrder) => (
           <TableCell
             align='center'
             sx={{
@@ -147,13 +132,13 @@ export default function TableMensajeros() {
         <Table sx={{ borderColor: "#694D2C" }} aria-label='collapsible table'>
           <TableHead sx={{ maxHeight: 10, background: "#0F0F0F" }}>
             <TableRow sx={{ borderColor: "#694D2C" }}>
-              {columnNames.map((columnName) => (
+              {columnNamesMensajero.map((columnNamesMensajero) => (
                 <TableCell
                   align='center'
                   sx={{ borderColor: "#694D2C", color: "white" }}
-                  key={columnName}
+                  key={columnNamesMensajero}
                 >
-                  {columnName}
+                  {columnNamesMensajero}
                 </TableCell>
               ))}
 
@@ -179,7 +164,6 @@ export default function TableMensajeros() {
                 key={row.Correo}
                 row={row}
                 eliminarPorId={eliminarPorId}
-                arrayOfKeysNamesInOrder={arrayOfKeysNamesInOrder}
               />
             ))}
           </TableBody>

@@ -8,7 +8,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -16,7 +15,15 @@ import ModalFormContenedores from "../Modals/ModalFormContenedores";
 import ModalEliminarContenedor from "../Modals/ModalEliminarContenedor";
 import { ModalEditarContenedores } from "../Modals/ModalEditarContenedores";
 import { useState } from "react";
+import {
+  columnNamesContenedor,
+  columnNamesContenedorMercancia,
+} from "../../Data/ColumnNames";
 
+import {
+  arrayOfKeysNamesInOrderContenedor,
+  arrayOfKeysNamesInOrderContenedorMercancia,
+} from "../../Data/RowOrganizers";
 function createData(
   Contenedor,
   CanidadPaquetes,
@@ -46,45 +53,7 @@ function createData(
   };
 }
 
-const arrayOfKeysNamesInOrder = [
-  "Contenedor",
-  "CanidadPaquetes",
-  "Peso",
-  "EstadoGeneral",
-  "Numero",
-  "Manifiesto",
-];
-
-const arrayOfKeysNamesInOrderColap = [
-  "Paquetes",
-  "Pesokg",
-  "Contenedor",
-  "HBL",
-];
-
-const columnNames = [
-  "Contenedor",
-  "Canidad de Paquetes",
-  "Peso",
-  "Estado",
-  "Numero",
-  "Manifiesto",
-];
-
-const columnNamesMercancia = [
-  "Paquetes Producto Enviado",
-  "Peso (Kg)",
-  "Contenedor",
-  "HBL",
-];
-
-function Row({
-  row,
-  eliminarPorId,
-  columnNamesMercancia,
-  arrayOfKeysNamesInOrder,
-  arrayOfKeysNamesInOrderColap,
-}) {
+function Row({ row, eliminarPorId }) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -102,7 +71,7 @@ function Row({
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        {arrayOfKeysNamesInOrder.map((keyNameForOrder) => (
+        {arrayOfKeysNamesInOrderContenedor.map((keyNameForOrder) => (
           <TableCell
             align='center'
             sx={{
@@ -143,15 +112,17 @@ function Row({
               <Table size='small' aria-label='purchases'>
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
-                    {columnNamesMercancia.map((columnNamesMercancia) => (
-                      <TableCell
-                        align='center'
-                        sx={{ borderColor: "#694D2C", color: "white" }}
-                        key={columnNamesMercancia}
-                      >
-                        {columnNamesMercancia}
-                      </TableCell>
-                    ))}
+                    {columnNamesContenedorMercancia.map(
+                      (columnNamesContenedorMercancia) => (
+                        <TableCell
+                          align='center'
+                          sx={{ borderColor: "#694D2C", color: "white" }}
+                          key={columnNamesContenedorMercancia}
+                        >
+                          {columnNamesContenedorMercancia}
+                        </TableCell>
+                      )
+                    )}
                     <TableCell
                       sx={{ color: "white", borderColor: "#694D2C" }}
                       align='center'
@@ -165,19 +136,21 @@ function Row({
                 <TableBody>
                   {row.history.map((historyRow) => (
                     <TableRow key={historyRow.HBL}>
-                      {arrayOfKeysNamesInOrderColap.map((keyNameForOrder) => (
-                        <TableCell
-                          align='center'
-                          sx={{
-                            color: "white",
-                            borderColor: "#694D2C",
-                          }}
-                          component='th'
-                          scope='row'
-                        >
-                          {historyRow[keyNameForOrder]}
-                        </TableCell>
-                      ))}
+                      {arrayOfKeysNamesInOrderContenedorMercancia.map(
+                        (keyNameForOrder) => (
+                          <TableCell
+                            align='center'
+                            sx={{
+                              color: "white",
+                              borderColor: "#694D2C",
+                            }}
+                            component='th'
+                            scope='row'
+                          >
+                            {historyRow[keyNameForOrder]}
+                          </TableCell>
+                        )
+                      )}
                     </TableRow>
                   ))}
                 </TableBody>
@@ -240,13 +213,13 @@ export default function TableContenedor() {
                 component='th'
                 scope='row'
               ></TableCell>
-              {columnNames.map((columnName) => (
+              {columnNamesContenedor.map((columnNamesContenedor) => (
                 <TableCell
                   align='center'
                   sx={{ borderColor: "#694D2C", color: "white" }}
-                  key={columnName}
+                  key={columnNamesContenedor}
                 >
-                  {columnName}
+                  {columnNamesContenedor}
                 </TableCell>
               ))}
 
@@ -271,9 +244,6 @@ export default function TableContenedor() {
                 key={row.Contenedor}
                 row={row}
                 eliminarPorId={eliminarPorId}
-                columnNamesMercancia={columnNamesMercancia}
-                arrayOfKeysNamesInOrder={arrayOfKeysNamesInOrder}
-                arrayOfKeysNamesInOrderColap={arrayOfKeysNamesInOrderColap}
               />
             ))}
           </TableBody>

@@ -12,6 +12,17 @@ import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useState } from "react";
+import {
+  columnNamesHBL,
+  columnNamesHBLDestinatario,
+  columnNamesHBLRemitente,
+} from "../../Data/ColumnNames";
+
+import {
+  arrayOfKeysNamesInOrderHBL,
+  arrayOfKeysNamesInOrderHBLDestinatario,
+  arrayOfKeysNamesInOrderHBLRemitente,
+} from "../../Data/RowOrganizers";
 
 function createData(
   Bultos,
@@ -61,70 +72,6 @@ function createData(
   };
 }
 
-const columnNames = [
-  "Bultos",
-  "Peso (Kg)",
-  "Descripción",
-  "Estado",
-  "Dueño",
-  "Destinatario",
-];
-
-const arrayOfKeysNamesInOrder = [
-  "Bultos",
-  "Peso",
-  "Descripcion",
-  "Estado",
-  "Dueno",
-  "Destinatario",
-];
-
-const columnNamesDestinatario = [
-  "Información",
-  "Nombre",
-  "Dirección",
-  "Provincia",
-  "Municipio",
-  "Teléfono",
-  "DNI / Pasaporte",
-  "Carnet de Identidad",
-  "Correo",
-];
-
-const arrayOfKeysNamesInOrderDestinatario = [
-  "Info",
-  "Nombre",
-  "Direccion",
-  "Provincia",
-  "Municipio",
-  "Telefono",
-  "DNIPasaporte",
-  "CarnetIdentidad",
-  "Correo",
-];
-
-const columnNamesRemitente = [
-  "Información",
-  "Nombre",
-  "Apellido",
-  "Estado",
-  "Ciudad",
-  "Dirección",
-  "Email",
-  "Teléfono",
-];
-
-const arrayOfKeysNamesInOrderRemitente = [
-  "Info",
-  "Nombre",
-  "Apellido",
-  "Estado",
-  "Ciudad",
-  "Direccion",
-  "Email",
-  "Telefono",
-  "Pagado",
-];
 function Row({
   row,
   eliminarPorId,
@@ -150,7 +97,7 @@ function Row({
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        {arrayOfKeysNamesInOrder.map((keyNameForOrder) => (
+        {arrayOfKeysNamesInOrderHBL.map((keyNameForOrder) => (
           <TableCell
             align='center'
             sx={{
@@ -179,22 +126,24 @@ function Row({
               <Table size='small' aria-label='purchases'>
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
-                    {columnNamesDestinatario.map((columnNamesDestinatario) => (
-                      <TableCell
-                        align='center'
-                        sx={{ borderColor: "#694D2C", color: "white" }}
-                        key={columnNamesDestinatario}
-                      >
-                        {columnNamesDestinatario}
-                      </TableCell>
-                    ))}
+                    {columnNamesHBLDestinatario.map(
+                      (columnNamesHBLDestinatario) => (
+                        <TableCell
+                          align='center'
+                          sx={{ borderColor: "#694D2C", color: "white" }}
+                          key={columnNamesHBLDestinatario}
+                        >
+                          {columnNamesHBLDestinatario}
+                        </TableCell>
+                      )
+                    )}
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {row.DatosDestinatario.map((historyRow) => (
                     <TableRow key={historyRow.HBL}>
-                      {arrayOfKeysNamesInOrderDestinatario.map(
-                        (arrayOfKeysNamesInOrderDestinatario) => (
+                      {arrayOfKeysNamesInOrderHBLDestinatario.map(
+                        (arrayOfKeysNamesInOrderHBLDestinatario) => (
                           <TableCell
                             align='center'
                             sx={{
@@ -204,7 +153,7 @@ function Row({
                             component='th'
                             scope='row'
                           >
-                            {historyRow[arrayOfKeysNamesInOrderDestinatario]}
+                            {historyRow[arrayOfKeysNamesInOrderHBLDestinatario]}
                           </TableCell>
                         )
                       )}
@@ -220,13 +169,13 @@ function Row({
               <Table size='small' aria-label='purchases'>
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
-                    {columnNamesRemitente.map((columnNamesRemitente) => (
+                    {columnNamesHBLRemitente.map((columnNamesHBLRemitente) => (
                       <TableCell
                         align='center'
                         sx={{ borderColor: "#694D2C", color: "white" }}
-                        key={columnNamesRemitente}
+                        key={columnNamesHBLRemitente}
                       >
-                        {columnNamesRemitente}
+                        {columnNamesHBLRemitente}
                       </TableCell>
                     ))}
                   </TableRow>
@@ -234,8 +183,8 @@ function Row({
                 <TableBody>
                   {row.DatosRemitente.map((historyRow) => (
                     <TableRow key={historyRow.HBL}>
-                      {arrayOfKeysNamesInOrderRemitente.map(
-                        (arrayOfKeysNamesInOrderRemitente) => (
+                      {arrayOfKeysNamesInOrderHBLRemitente.map(
+                        (arrayOfKeysNamesInOrderHBLRemitente) => (
                           <TableCell
                             align='center'
                             sx={{
@@ -245,7 +194,7 @@ function Row({
                             component='th'
                             scope='row'
                           >
-                            {historyRow[arrayOfKeysNamesInOrderRemitente]}
+                            {historyRow[arrayOfKeysNamesInOrderHBLRemitente]}
                           </TableCell>
                         )
                       )}
@@ -301,13 +250,13 @@ export default function TableHBL() {
                 align='center'
                 sx={{ borderColor: "#694D2C", color: "white" }}
               ></TableCell>
-              {columnNames.map((columnName) => (
+              {columnNamesHBL.map((columnNamesHBL) => (
                 <TableCell
                   align='center'
                   sx={{ borderColor: "#694D2C", color: "white" }}
-                  key={columnName}
+                  key={columnNamesHBL}
                 >
-                  {columnName}
+                  {columnNamesHBL}
                 </TableCell>
               ))}
             </TableRow>
@@ -319,15 +268,6 @@ export default function TableHBL() {
                 key={row.name}
                 row={row}
                 eliminarPorId={eliminarPorId}
-                arrayOfKeysNamesInOrder={arrayOfKeysNamesInOrder}
-                columnNamesRemitente={columnNamesRemitente}
-                arrayOfKeysNamesInOrderRemitente={
-                  arrayOfKeysNamesInOrderRemitente
-                }
-                columnNamesDestinatario={columnNamesDestinatario}
-                arrayOfKeysNamesInOrderDestinatario={
-                  arrayOfKeysNamesInOrderDestinatario
-                }
               />
             ))}
           </TableBody>

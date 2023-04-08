@@ -10,7 +10,9 @@ import ModalAdmin from "../Modals/ModalAdmin";
 import { ModalEditarAdmin } from "../Modals/ModalEditarAdmin";
 import ModalEliminarAdministrador from "../Modals/ModalEliminarAdministrador";
 import { useState } from "react";
+import { columnNamesAdmin } from "../../Data/ColumnNames";
 
+import { arrayOfKeysNamesInOrderAdmin } from "../../Data/RowOrganizers";
 // Definimos la función que crea las filas
 function createData(
   email,
@@ -30,24 +32,8 @@ function createData(
   };
 }
 
-const arrayOfKeysNamesInOrder = [
-  "email",
-  "password",
-  "JWT",
-  "typeOfPermission",
-  "recoverPassword",
-];
-
-const columnNames = [
-  "Correo",
-  "Contraseña",
-  "JWT",
-  "Tipo de Permiso",
-  "Recuperar Contraseña",
-];
-
 // Definimos la función que renderiza cada fila
-function Row({ row, eliminarPorId, arrayOfKeysNamesInOrder }) {
+function Row({ row, eliminarPorId }) {
   return (
     <>
       <TableRow
@@ -59,7 +45,7 @@ function Row({ row, eliminarPorId, arrayOfKeysNamesInOrder }) {
         }}
         key={row.id}
       >
-        {arrayOfKeysNamesInOrder.map((keyNameForOrder) => (
+        {arrayOfKeysNamesInOrderAdmin.map((keyNameForOrder) => (
           <TableCell
             align='center'
             sx={{
@@ -135,13 +121,13 @@ export default function TableAdmin() {
         <Table sx={{ borderColor: "#694D2C" }} ariaLabel='collapsible table'>
           <TableHead sx={{ background: "#0F0F0F" }}>
             <TableRow sx={{ borderColor: "#694D2C" }}>
-              {columnNames.map((columnName) => (
+              {columnNamesAdmin.map((columnNamesAdmin) => (
                 <TableCell
                   align='center'
                   sx={{ borderColor: "#694D2C", color: "white" }}
-                  key={columnName}
+                  key={columnNamesAdmin}
                 >
-                  {columnName}
+                  {columnNamesAdmin}
                 </TableCell>
               ))}
 
@@ -161,12 +147,7 @@ export default function TableAdmin() {
           </TableHead>
           <TableBody sx={{ borderColor: "#694D2C", color: "white" }}>
             {rows.map((row) => (
-              <Row
-                key={row.Correo}
-                row={row}
-                eliminarPorId={eliminarPorId}
-                arrayOfKeysNamesInOrder={arrayOfKeysNamesInOrder}
-              />
+              <Row key={row.Correo} row={row} eliminarPorId={eliminarPorId} />
             ))}
           </TableBody>
         </Table>
