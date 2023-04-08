@@ -46,7 +46,45 @@ function createData(
   };
 }
 
-function Row({ row, eliminarPorId }) {
+const arrayOfKeysNamesInOrder = [
+  "Contenedor",
+  "CanidadPaquetes",
+  "Peso",
+  "EstadoGeneral",
+  "Numero",
+  "Manifiesto",
+];
+
+const arrayOfKeysNamesInOrderColap = [
+  "Paquetes",
+  "Pesokg",
+  "Contenedor",
+  "HBL",
+];
+
+const columnNames = [
+  "Contenedor",
+  "Canidad de Paquetes",
+  "Peso",
+  "Estado",
+  "Numero",
+  "Manifiesto",
+];
+
+const columnNamesMercancia = [
+  "Paquetes Producto Enviado",
+  "Peso (Kg)",
+  "Contenedor",
+  "HBL",
+];
+
+function Row({
+  row,
+  eliminarPorId,
+  columnNamesMercancia,
+  arrayOfKeysNamesInOrder,
+  arrayOfKeysNamesInOrderColap,
+}) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -64,43 +102,19 @@ function Row({ row, eliminarPorId }) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          component='th'
-          scope='row'
-        >
-          {row.Contenedor}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.CanidadPaquetes}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Peso}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='right'
-        >
-          {row.EstadoGeneral}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Numero}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Manifiesto}
-        </TableCell>
+        {arrayOfKeysNamesInOrder.map((keyNameForOrder) => (
+          <TableCell
+            align='center'
+            sx={{
+              color: "white",
+              borderColor: "#694D2C",
+            }}
+            component='th'
+            scope='row'
+          >
+            {row[keyNameForOrder]}
+          </TableCell>
+        ))}
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
@@ -126,35 +140,18 @@ function Row({ row, eliminarPorId }) {
         >
           <Collapse in={open} timeout='auto' unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              <Typography
-                color={"white"}
-                variant='h6'
-                gutterBottom
-                component='div'
-              >
-                {/* History */}
-              </Typography>
               <Table size='small' aria-label='purchases'>
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
-                    <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      Paquetes Producto Enviado
-                    </TableCell>
-                    <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      Peso (Kg)
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      Contenedor
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      HBL
-                    </TableCell>
+                    {columnNamesMercancia.map((columnNamesMercancia) => (
+                      <TableCell
+                        align='center'
+                        sx={{ borderColor: "#694D2C", color: "white" }}
+                        key={columnNamesMercancia}
+                      >
+                        {columnNamesMercancia}
+                      </TableCell>
+                    ))}
                     <TableCell
                       sx={{ color: "white", borderColor: "#694D2C" }}
                       align='center'
@@ -167,39 +164,20 @@ function Row({ row, eliminarPorId }) {
                 </TableHead>
                 <TableBody>
                   {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.dni_pasaporte}>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        component='th'
-                        scope='row'
-                      >
-                        {historyRow.Paquetes}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                      >
-                        {historyRow.Pesokg}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {historyRow.Contenedor}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {historyRow.HBL}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      ></TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      ></TableCell>
+                    <TableRow key={historyRow.HBL}>
+                      {arrayOfKeysNamesInOrderColap.map((keyNameForOrder) => (
+                        <TableCell
+                          align='center'
+                          sx={{
+                            color: "white",
+                            borderColor: "#694D2C",
+                          }}
+                          component='th'
+                          scope='row'
+                        >
+                          {historyRow[keyNameForOrder]}
+                        </TableCell>
+                      ))}
                     </TableRow>
                   ))}
                 </TableBody>
@@ -215,8 +193,8 @@ function Row({ row, eliminarPorId }) {
 export default function TableContenedor() {
   const [rows, setRows] = useState([
     createData(
-      60,
-      " 550",
+      "60",
+      "550",
       " 220",
       "Rumbo habana-Dominicana_Florida",
       "24120",
@@ -257,41 +235,20 @@ export default function TableContenedor() {
         <Table sx={{ borderColor: "#694D2C" }} aria-label='collapsible table'>
           <TableHead sx={{ maxHeight: 10, background: "#0F0F0F" }}>
             <TableRow sx={{ borderColor: "#694D2C" }}>
-              <TableCell sx={{ borderColor: "#694D2C" }} />
-              <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
-                Contenedor
-              </TableCell>
               <TableCell
-                style={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Cantidad de Paquetes
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Peso (Lb)
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Estado General
-              </TableCell>
-
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Número
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Manifiesto
-              </TableCell>
+                sx={{ color: "white", borderColor: "#694D2C" }}
+                component='th'
+                scope='row'
+              ></TableCell>
+              {columnNames.map((columnName) => (
+                <TableCell
+                  align='center'
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  key={columnName}
+                >
+                  {columnName}
+                </TableCell>
+              ))}
 
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
@@ -314,6 +271,9 @@ export default function TableContenedor() {
                 key={row.Contenedor}
                 row={row}
                 eliminarPorId={eliminarPorId}
+                columnNamesMercancia={columnNamesMercancia}
+                arrayOfKeysNamesInOrder={arrayOfKeysNamesInOrder}
+                arrayOfKeysNamesInOrderColap={arrayOfKeysNamesInOrderColap}
               />
             ))}
           </TableBody>

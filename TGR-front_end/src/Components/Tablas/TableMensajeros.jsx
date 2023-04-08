@@ -34,7 +34,25 @@ function createData(
   };
 }
 
-function Row({ row, eliminarPorId }) {
+const arrayOfKeysNamesInOrder = [
+  "Nombre",
+  "CantidadEnvios",
+  "Matricula",
+  "Provincia",
+  "Telefono",
+  "Movil",
+];
+
+const columnNames = [
+  "Nombre",
+  "Cantidad de Envios",
+  "Matrícula",
+  "Provincia",
+  "Teléfono",
+  "Móvil",
+];
+
+function Row({ row, eliminarPorId, arrayOfKeysNamesInOrder }) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -42,53 +60,19 @@ function Row({ row, eliminarPorId }) {
       <TableRow
         sx={{ "& > *": { borderBottom: "unset", borderColor: "#694D2C" } }}
       >
-        <TableCell sx={{ borderColor: "#694D2C" }}>
-          <IconButton
-            sx={{ color: "white", borderColor: "#694D2C" }}
-            aria-label='expand row'
-            size='small'
-            onClick={() => setOpen(!open)}
-          ></IconButton>
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          component='th'
-          scope='row'
-        >
-          {row.Nombre}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.CantidadEnvios}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Matricula}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Provincia}
-        </TableCell>
-
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Telefono}
-        </TableCell>
-
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Movil}
-        </TableCell>
+        {arrayOfKeysNamesInOrder.map((keyNameForOrder) => (
+          <TableCell
+            align='center'
+            sx={{
+              color: "white",
+              borderColor: "#694D2C",
+            }}
+            component='th'
+            scope='row'
+          >
+            {row[keyNameForOrder]}
+          </TableCell>
+        ))}
 
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
@@ -163,40 +147,15 @@ export default function TableMensajeros() {
         <Table sx={{ borderColor: "#694D2C" }} aria-label='collapsible table'>
           <TableHead sx={{ maxHeight: 10, background: "#0F0F0F" }}>
             <TableRow sx={{ borderColor: "#694D2C" }}>
-              <TableCell sx={{ borderColor: "#694D2C" }} />
-              <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
-                Nombre
-              </TableCell>
-              <TableCell
-                style={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Cantidad de Envios
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Matrícula
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Provincia
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Teléfono
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Móvil
-              </TableCell>
+              {columnNames.map((columnName) => (
+                <TableCell
+                  align='center'
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  key={columnName}
+                >
+                  {columnName}
+                </TableCell>
+              ))}
 
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
@@ -220,6 +179,7 @@ export default function TableMensajeros() {
                 key={row.Correo}
                 row={row}
                 eliminarPorId={eliminarPorId}
+                arrayOfKeysNamesInOrder={arrayOfKeysNamesInOrder}
               />
             ))}
           </TableBody>

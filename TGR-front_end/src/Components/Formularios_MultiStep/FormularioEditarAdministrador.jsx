@@ -9,13 +9,13 @@ import { Grid, Input, Typography } from "@mui/material";
 export const FormularioEditarAdministrador = ({ handleClose, row }) => {
   const [formData, setFormData] = React.useState({
     /////// ****1/2****/////////////////
-    Correo: row.Correo,
-    Contrasena: row.Contrasena,
+    Correo: row.email,
+    Contrasena: row.password,
     JWT: row.JWT,
 
     ///////****2/2****//////////////////
-    RecuperarContrasena: row.RecuperarContrasena,
-    TipoPermiso: row.TipoPermiso,
+    RecuperarContrasena: row.recoverPassword,
+    TipoPermiso: row.typeOfPermission,
   });
   const [activeStep, setActiveStep] = React.useState(0);
 

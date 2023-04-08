@@ -1,5 +1,4 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -9,7 +8,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -63,7 +61,78 @@ function createData(
   };
 }
 
-function Row({ row, eliminarPorId }) {
+const columnNames = [
+  "Bultos",
+  "Peso (Kg)",
+  "Descripción",
+  "Estado",
+  "Dueño",
+  "Destinatario",
+];
+
+const arrayOfKeysNamesInOrder = [
+  "Bultos",
+  "Peso",
+  "Descripcion",
+  "Estado",
+  "Dueno",
+  "Destinatario",
+];
+
+const columnNamesDestinatario = [
+  "Información",
+  "Nombre",
+  "Dirección",
+  "Provincia",
+  "Municipio",
+  "Teléfono",
+  "DNI / Pasaporte",
+  "Carnet de Identidad",
+  "Correo",
+];
+
+const arrayOfKeysNamesInOrderDestinatario = [
+  "Info",
+  "Nombre",
+  "Direccion",
+  "Provincia",
+  "Municipio",
+  "Telefono",
+  "DNIPasaporte",
+  "CarnetIdentidad",
+  "Correo",
+];
+
+const columnNamesRemitente = [
+  "Información",
+  "Nombre",
+  "Apellido",
+  "Estado",
+  "Ciudad",
+  "Dirección",
+  "Email",
+  "Teléfono",
+];
+
+const arrayOfKeysNamesInOrderRemitente = [
+  "Info",
+  "Nombre",
+  "Apellido",
+  "Estado",
+  "Ciudad",
+  "Direccion",
+  "Email",
+  "Telefono",
+  "Pagado",
+];
+function Row({
+  row,
+  eliminarPorId,
+  arrayOfKeysNamesInOrderRemitente,
+  columnNamesRemitente,
+  arrayOfKeysNamesInOrderDestinatario,
+  columnNamesDestinatario,
+}) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -81,43 +150,19 @@ function Row({ row, eliminarPorId }) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          component='th'
-          scope='row'
-        >
-          {row.Bultos}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Peso}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Descripcion}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='right'
-        >
-          {row.Estado}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Dueno}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Destinatario}
-        </TableCell>
+        {arrayOfKeysNamesInOrder.map((keyNameForOrder) => (
+          <TableCell
+            align='center'
+            sx={{
+              color: "white",
+              borderColor: "#694D2C",
+            }}
+            component='th'
+            scope='row'
+          >
+            {row[keyNameForOrder]}
+          </TableCell>
+        ))}
       </TableRow>
       <TableRow>
         <TableCell
@@ -134,83 +179,35 @@ function Row({ row, eliminarPorId }) {
               <Table size='small' aria-label='purchases'>
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
-                    <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      Información
-                    </TableCell>
-                    <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      Nombre
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      Municipio
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      Teléfono
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      DNI / Pasaporte
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      Carnet de Identidad
-                    </TableCell>
+                    {columnNamesDestinatario.map((columnNamesDestinatario) => (
+                      <TableCell
+                        align='center'
+                        sx={{ borderColor: "#694D2C", color: "white" }}
+                        key={columnNamesDestinatario}
+                      >
+                        {columnNamesDestinatario}
+                      </TableCell>
+                    ))}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.DatosDestinatario.map((Destinatario) => (
-                    <TableRow key={Destinatario.Email}>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        component='th'
-                        scope='row'
-                      >
-                        {Destinatario.Info}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                      >
-                        {Destinatario.Nombre}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {Destinatario.Municipio}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {Destinatario.Telefono}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {Destinatario.DNIPasaporte}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {Destinatario.CarnetIdentidad}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {Destinatario.Email}
-                      </TableCell>
+                  {row.DatosDestinatario.map((historyRow) => (
+                    <TableRow key={historyRow.HBL}>
+                      {arrayOfKeysNamesInOrderDestinatario.map(
+                        (arrayOfKeysNamesInOrderDestinatario) => (
+                          <TableCell
+                            align='center'
+                            sx={{
+                              color: "white",
+                              borderColor: "#694D2C",
+                            }}
+                            component='th'
+                            scope='row'
+                          >
+                            {historyRow[arrayOfKeysNamesInOrderDestinatario]}
+                          </TableCell>
+                        )
+                      )}
                     </TableRow>
                   ))}
                 </TableBody>
@@ -223,101 +220,35 @@ function Row({ row, eliminarPorId }) {
               <Table size='small' aria-label='purchases'>
                 <TableHead>
                   <TableRow sx={{ color: "white", borderColor: "#694D2C" }}>
-                    <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      Información
-                    </TableCell>
-                    <TableCell sx={{ color: "white", borderColor: "#694D2C" }}>
-                      Nombre
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      Apellido
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      Estado
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      Ciudad
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      Dirección
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      Email
-                    </TableCell>
-                    <TableCell
-                      sx={{ color: "white", borderColor: "#694D2C" }}
-                      align='center'
-                    >
-                      Teléfono
-                    </TableCell>
+                    {columnNamesRemitente.map((columnNamesRemitente) => (
+                      <TableCell
+                        align='center'
+                        sx={{ borderColor: "#694D2C", color: "white" }}
+                        key={columnNamesRemitente}
+                      >
+                        {columnNamesRemitente}
+                      </TableCell>
+                    ))}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.DatosRemitente.map((Destinatario) => (
-                    <TableRow key={Destinatario.Email}>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        component='th'
-                        scope='row'
-                      >
-                        {Destinatario.Info}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                      >
-                        {Destinatario.Nombre}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {Destinatario.Apellido}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {Destinatario.Estado}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {Destinatario.Ciudad}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {Destinatario.Direccion}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {Destinatario.Email}
-                      </TableCell>
-                      <TableCell
-                        sx={{ color: "white", borderColor: "#694D2C" }}
-                        align='center'
-                      >
-                        {Destinatario.Telefono}
-                      </TableCell>
+                  {row.DatosRemitente.map((historyRow) => (
+                    <TableRow key={historyRow.HBL}>
+                      {arrayOfKeysNamesInOrderRemitente.map(
+                        (arrayOfKeysNamesInOrderRemitente) => (
+                          <TableCell
+                            align='center'
+                            sx={{
+                              color: "white",
+                              borderColor: "#694D2C",
+                            }}
+                            component='th'
+                            scope='row'
+                          >
+                            {historyRow[arrayOfKeysNamesInOrderRemitente]}
+                          </TableCell>
+                        )
+                      )}
                     </TableRow>
                   ))}
                 </TableBody>
@@ -366,40 +297,19 @@ export default function TableHBL() {
         <Table sx={{ borderColor: "#694D2C" }} aria-label='collapsible table'>
           <TableHead sx={{ maxHeight: 10, background: "#0F0F0F" }}>
             <TableRow sx={{ borderColor: "#694D2C" }}>
-              <TableCell sx={{ borderColor: "#694D2C" }} />
-              <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
-                Bultos
-              </TableCell>
               <TableCell
-                style={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
-              >
-                Peso (Kg)
-              </TableCell>
-              <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Descripción
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Estado
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Dueño
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Destinatario
-              </TableCell>
+              ></TableCell>
+              {columnNames.map((columnName) => (
+                <TableCell
+                  align='center'
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  key={columnName}
+                >
+                  {columnName}
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody sx={{ borderColor: "#694D2C", color: "white" }}>
@@ -409,6 +319,15 @@ export default function TableHBL() {
                 key={row.name}
                 row={row}
                 eliminarPorId={eliminarPorId}
+                arrayOfKeysNamesInOrder={arrayOfKeysNamesInOrder}
+                columnNamesRemitente={columnNamesRemitente}
+                arrayOfKeysNamesInOrderRemitente={
+                  arrayOfKeysNamesInOrderRemitente
+                }
+                columnNamesDestinatario={columnNamesDestinatario}
+                arrayOfKeysNamesInOrderDestinatario={
+                  arrayOfKeysNamesInOrderDestinatario
+                }
               />
             ))}
           </TableBody>

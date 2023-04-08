@@ -1,5 +1,4 @@
 import * as React from "react";
-import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -14,77 +13,71 @@ import { useState } from "react";
 
 // Definimos la función que crea las filas
 function createData(
-  Correo,
-  Contrasena,
+  email,
+  password,
   JWT,
-  TipoPermiso,
-  RecuperarContrasena,
+  typeOfPermission,
+  recoverPassword,
   id
 ) {
   return {
-    Correo,
-    Contrasena,
+    email,
+    password,
     JWT,
-    TipoPermiso,
-    RecuperarContrasena,
+    typeOfPermission,
+    recoverPassword,
     id,
   };
 }
 
+const arrayOfKeysNamesInOrder = [
+  "email",
+  "password",
+  "JWT",
+  "typeOfPermission",
+  "recoverPassword",
+];
+
+const columnNames = [
+  "Correo",
+  "Contraseña",
+  "JWT",
+  "Tipo de Permiso",
+  "Recuperar Contraseña",
+];
+
 // Definimos la función que renderiza cada fila
-function Row({ row, eliminarPorId }) {
-  const [open, setOpen] = React.useState(false);
+function Row({ row, eliminarPorId, arrayOfKeysNamesInOrder }) {
   return (
-    <React.Fragment>
+    <>
       <TableRow
-        sx={{ "& > *": { borderBottom: "unset", borderColor: "#694D2C" } }}
+        sx={{
+          "& > *": {
+            borderBottom: "unset",
+            borderColor: "#694D2C",
+          },
+        }}
+        key={row.id}
       >
-        <TableCell sx={{ borderColor: "#694D2C" }}>
-          <IconButton
-            sx={{ color: "white", borderColor: "#694D2C" }}
-            aria-label='expand row'
-            size='small'
-            onClick={() => setOpen(!open)}
-          ></IconButton>
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          component='th'
-          scope='row'
-        >
-          {row.Correo}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.Contrasena}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.JWT}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.TipoPermiso}
-        </TableCell>
-        <TableCell
-          sx={{ color: "white", borderColor: "#694D2C" }}
-          align='center'
-        >
-          {row.RecuperarContrasena}
-        </TableCell>
+        {arrayOfKeysNamesInOrder.map((keyNameForOrder) => (
+          <TableCell
+            align='center'
+            sx={{
+              color: "white",
+              borderColor: "#694D2C",
+            }}
+            component='th'
+            scope='row'
+          >
+            {row[keyNameForOrder]}
+          </TableCell>
+        ))}
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
         >
           <ModalEditarAdmin row={row} />
         </TableCell>
-
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
@@ -92,7 +85,7 @@ function Row({ row, eliminarPorId }) {
           <ModalEliminarAdministrador row={row} eliminarPorId={eliminarPorId} />
         </TableCell>
       </TableRow>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -142,34 +135,16 @@ export default function TableAdmin() {
         <Table sx={{ borderColor: "#694D2C" }} ariaLabel='collapsible table'>
           <TableHead sx={{ background: "#0F0F0F" }}>
             <TableRow sx={{ borderColor: "#694D2C" }}>
-              <TableCell sx={{ borderColor: "#694D2C" }} />
-              <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
-                Correo
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Contraseña
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                JWT
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Tipo de Permiso
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Recuperar Contraseña
-              </TableCell>
+              {columnNames.map((columnName) => (
+                <TableCell
+                  align='center'
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  key={columnName}
+                >
+                  {columnName}
+                </TableCell>
+              ))}
+
               <TableCell
                 sx={{ borderColor: "#694D2C", color: "white" }}
                 align='center'
@@ -186,7 +161,12 @@ export default function TableAdmin() {
           </TableHead>
           <TableBody sx={{ borderColor: "#694D2C", color: "white" }}>
             {rows.map((row) => (
-              <Row key={row.Correo} row={row} eliminarPorId={eliminarPorId} />
+              <Row
+                key={row.Correo}
+                row={row}
+                eliminarPorId={eliminarPorId}
+                arrayOfKeysNamesInOrder={arrayOfKeysNamesInOrder}
+              />
             ))}
           </TableBody>
         </Table>
