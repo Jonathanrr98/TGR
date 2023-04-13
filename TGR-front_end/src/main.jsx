@@ -20,6 +20,7 @@ import { Contenedores } from "./Routes/Admin_Tipo1/Contenedores";
 import { HBL } from "./Routes/Admin_Tipo1/HBL";
 import { Manifiesto } from "./Routes/Admin_Tipo1/Manifiesto";
 import { Vistacliente } from "./Routes/Cliente/VistaCliente";
+import { Factura } from "./Routes/Factura";
 
 const router = createBrowserRouter([
   {
@@ -92,6 +93,12 @@ const router = createBrowserRouter([
   {
     path: "/vistacliente",
     element: <Vistacliente />,
+  },
+
+  //Factura
+  {
+    path: "/factura",
+    element: <Factura />,
   },
 ]);
 

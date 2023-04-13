@@ -17,6 +17,7 @@ import ModalCliente from "../Modals/ModalCliente";
 import ModalEliminarCliente from "../Modals/ModalEliminarCliente";
 import { ModalEditarCliente } from "../Modals/ModalEditarCliente";
 import { useState } from "react";
+import ModalFactura from "../Modals/ModalFactura";
 
 function createData(
   name,
@@ -159,6 +160,15 @@ function Row({ row, eliminarPorId }) {
           {row.Estado}
         </TableCell>
 
+        <TableCell
+          sx={{
+            color: "white",
+            borderColor: "#694D2C",
+          }}
+          align='center'
+        >
+          <ModalFactura row={row} />
+        </TableCell>
         <TableCell
           sx={{ color: "white", borderColor: "#694D2C" }}
           align='center'
@@ -415,6 +425,18 @@ export default function TableClient() {
       "En Cuba",
       1
     ),
+
+    createData(
+      "Pepe",
+      " sanchez",
+      " si",
+      " mail33@asd.com",
+      "+" + 13383589139,
+      "calle 5, Ave 3ra e/ 4ta Miami Fl",
+      "Las Tunas",
+      "En Miami",
+      2
+    ),
   ]);
 
   const eliminarPorId = (id) => {
@@ -480,6 +502,12 @@ export default function TableClient() {
                 align='center'
               >
                 Estado
+              </TableCell>
+              <TableCell
+                sx={{ borderColor: "#694D2C", color: "white" }}
+                align='center'
+              >
+                Factura
               </TableCell>
 
               <TableCell
