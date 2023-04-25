@@ -18,6 +18,7 @@ import ModalEliminarCliente from "../Modals/ModalEliminarCliente";
 import { ModalEditarCliente } from "../Modals/ModalEditarCliente";
 import { useState } from "react";
 import ModalFactura from "../Modals/ModalFactura";
+import { useContext } from "react";
 
 function createData(
   name,
@@ -412,6 +413,8 @@ function Row({ row, eliminarPorId }) {
   );
 }
 
+export const RowsContext = React.createContext();
+
 export default function TableClient() {
   const [rows, setRows] = useState([
     createData(
@@ -445,98 +448,100 @@ export default function TableClient() {
   };
   return (
     <>
-      <ModalCliente text={"Crear Cliente"} />
+      <RowsContext.Provider value={rows}>
+        <ModalCliente text={"Crear Cliente"} />
 
-      <TableContainer
-        sx={{
-          backgroundColor: "#252525",
-          borderColor: "#694D2C",
-        }}
-        component={Paper}
-      >
-        <Table sx={{ borderColor: "#694D2C" }} aria-label='collapsible table'>
-          <TableHead sx={{ maxHeight: 10, background: "#0F0F0F" }}>
-            <TableRow sx={{ borderColor: "#694D2C" }}>
-              <TableCell sx={{ borderColor: "#694D2C" }} />
-              <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
-                Nombre
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Apellido
-              </TableCell>
-              <TableCell
-                style={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Pagado
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Email
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Teléfono
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Dirección
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Ciudad
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Estado
-              </TableCell>
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Factura
-              </TableCell>
+        <TableContainer
+          sx={{
+            backgroundColor: "#252525",
+            borderColor: "#694D2C",
+          }}
+          component={Paper}
+        >
+          <Table sx={{ borderColor: "#694D2C" }} aria-label='collapsible table'>
+            <TableHead sx={{ maxHeight: 10, background: "#0F0F0F" }}>
+              <TableRow sx={{ borderColor: "#694D2C" }}>
+                <TableCell sx={{ borderColor: "#694D2C" }} />
+                <TableCell sx={{ borderColor: "#694D2C", color: "white" }}>
+                  Nombre
+                </TableCell>
+                <TableCell
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  align='center'
+                >
+                  Apellido
+                </TableCell>
+                <TableCell
+                  style={{ borderColor: "#694D2C", color: "white" }}
+                  align='center'
+                >
+                  Pagado
+                </TableCell>
+                <TableCell
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  align='center'
+                >
+                  Email
+                </TableCell>
+                <TableCell
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  align='center'
+                >
+                  Teléfono
+                </TableCell>
+                <TableCell
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  align='center'
+                >
+                  Dirección
+                </TableCell>
+                <TableCell
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  align='center'
+                >
+                  Ciudad
+                </TableCell>
+                <TableCell
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  align='center'
+                >
+                  Estado
+                </TableCell>
+                <TableCell
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  align='center'
+                >
+                  Factura
+                </TableCell>
 
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Editar
-              </TableCell>
+                <TableCell
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  align='center'
+                >
+                  Editar
+                </TableCell>
 
-              <TableCell
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                align='center'
-              >
-                Eliminar
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody sx={{ borderColor: "#694D2C", color: "white" }}>
-            {rows.map((row) => (
-              <Row
-                sx={{ borderColor: "#694D2C", color: "white" }}
-                key={row.id}
-                row={row}
-                eliminarPorId={eliminarPorId}
-              />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                <TableCell
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  align='center'
+                >
+                  Eliminar
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody sx={{ borderColor: "#694D2C", color: "white" }}>
+              {rows.map((row) => (
+                <Row
+                  sx={{ borderColor: "#694D2C", color: "white" }}
+                  key={row.id}
+                  row={row}
+                  eliminarPorId={eliminarPorId}
+                />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </RowsContext.Provider>
     </>
   );
 }

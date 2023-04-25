@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Modal from "@mui/material/Modal";
 import { Grid } from "@mui/material";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { Factura } from "../../Routes/Factura";
+import Modal from "@mui/material/node/Modal";
 
 export default function ModalFactura({ row }) {
   const [open, setOpen] = useState(false);
@@ -34,6 +34,9 @@ export default function ModalFactura({ row }) {
           alignItems: "center",
           justifyContent: "center",
           overflow: "auto",
+          backgroundColor: "white",
+          p: 5,
+          height: "100%",
         }}
         open={open}
         onClose={handleClose}
@@ -44,14 +47,19 @@ export default function ModalFactura({ row }) {
           direction='column'
           alignItems='center'
           justifyContent='center'
+          sx={{
+            backgroundColor: "white",
+            height: "100%",
+            width: "100%",
+          }}
         >
           <Grid
             item
-            maxHeight={500}
-            maxWidth={400}
             sx={{
-              p: 4,
-              color: "black",
+              p: 3,
+              height: "100%",
+              overflow: "auto",
+              mb: 5,
             }}
           >
             <Factura row={row} handleClose={handleClose} />
